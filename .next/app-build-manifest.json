@@ -1,0 +1,42 @@
+{
+  "pages": {
+    "/_not-found/page": [
+      "static/chunks/webpack-19c4fffaac990293.js",
+      "static/chunks/fd9d1056-c16c1ddf1e76de95.js",
+      "static/chunks/117-1d156740ae79e8b6.js",
+      "static/chunks/main-app-b278ec3cdb066fbf.js",
+      "static/chunks/app/_not-found/page-176c405ee115bfa7.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack-19c4fffaac990293.js",
+      "static/chunks/fd9d1056-c16c1ddf1e76de95.js",
+      "static/chunks/117-1d156740ae79e8b6.js",
+      "static/chunks/main-app-b278ec3cdb066fbf.js",
+      "static/css/28e875b6035401d6.css",
+      "static/chunks/app/layout-e922adeb82cc714f.js"
+    ],
+    "/case-studies/vijay-tech/page": [
+      "static/chunks/webpack-19c4fffaac990293.js",
+      "static/chunks/fd9d1056-c16c1ddf1e76de95.js",
+      "static/chunks/117-1d156740ae79e8b6.js",
+      "static/chunks/main-app-b278ec3cdb066fbf.js",
+      "static/chunks/972-1ee9cb783e3a285b.js",
+      "static/chunks/app/case-studies/vijay-tech/page-c329db7de9da865a.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-19c4fffaac990293.js",
+      "static/chunks/fd9d1056-c16c1ddf1e76de95.js",
+      "static/chunks/117-1d156740ae79e8b6.js",
+      "static/chunks/main-app-b278ec3cdb066fbf.js",
+      "static/chunks/app/page-a0d7473123a4db64.js"
+    ],
+    "/case-studies/vilindha/page": [
+      "static/chunks/webpack-19c4fffaac990293.js",
+      "static/chunks/fd9d1056-c16c1ddf1e76de95.js",
+      "static/chunks/117-1d156740ae79e8b6.js",
+      "static/chunks/main-app-b278ec3cdb066fbf.js",
+      "static/chunks/972-1ee9cb783e3a285b.js",
+      "static/chunks/app/case-studies/vilindha/page-5372a634a6a3b8ce.js"
+    ]
+  }
+}

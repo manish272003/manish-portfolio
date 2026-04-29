@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Aeterna — Product Case Study</title>
+<meta name="description" content="A product manager's case study on Aeterna — a digital inheritance platform that turns a passive vault into a guided, executor-led legacy experience." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1A2E; --cream:#F7F3EC; --soft:#EFE9DC; --gold:#C9A86A;
+    --sage:#7A8F7A; --muted:#5A6478; --line:#D9D2C3; --ink-soft:#CFC8B8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;letter-spacing:-0.01em}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+  section{padding:96px 0}
+  @media(min-width:768px){section{padding:128px 0}}
+  .ink{background:var(--ink);color:var(--cream)}
+  .softbg{background:var(--soft)}
+  .kicker{font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+  h1.title{font-size:clamp(48px,7vw,96px);line-height:1.05;letter-spacing:-0.02em}
+  h2.heading{font-size:clamp(36px,5vw,56px);line-height:1.1;letter-spacing:-0.015em;max-width:720px}
+  h3{font-size:20px;font-weight:600;margin-bottom:12px}
+  p{color:rgba(15,26,46,0.8);max-width:760px}
+  .ink p,.ink li{color:var(--ink-soft)}
+  .lead{font-size:18px;margin-top:20px;max-width:720px}
+  .ink .lead{color:var(--ink-soft)}
+  .rule{height:1px;width:64px;background:var(--gold);margin:32px 0}
+  /* hero */
+  .hero{padding:128px 0 144px;background:var(--ink);color:var(--cream)}
+  .hero .badge{font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:32px}
+  .hero p.sub{font-size:clamp(18px,2.2vw,24px);color:var(--ink-soft);max-width:640px;margin-top:20px}
+  .meta{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;margin-top:40px}
+  @media(min-width:768px){.meta{grid-template-columns:repeat(4,1fr)}}
+  .meta dt{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:8px}
+  .meta dd{color:var(--cream);font-size:14px}
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:56px}
+  @media(min-width:768px){.stats{grid-template-columns:repeat(4,1fr)}}
+  .stat{border:1px solid var(--line);background:var(--cream);padding:32px;text-align:center;border-radius:8px}
+  .stat .num{font-family:'Cormorant Garamond',serif;font-size:56px;color:var(--gold);line-height:1}
+  .stat .lbl{margin-top:12px;font-size:12px;color:var(--muted);line-height:1.5}
+  /* quote */
+  blockquote{margin-top:64px;padding-left:24px;border-left:2px solid var(--gold);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:24px;line-height:1.5;color:var(--ink);max-width:760px}
+  /* lists */
+  .rows>div{display:grid;grid-template-columns:1fr;gap:16px;padding:20px 0;border-bottom:1px solid var(--line)}
+  @media(min-width:768px){.rows>div{grid-template-columns:140px 1fr;gap:24px}}
+  .rows .who{font-weight:600}
+  .rows .quote{color:rgba(15,26,46,0.8)}
+  /* personas */
+  .personas{display:grid;gap:40px;margin-top:56px;grid-template-columns:1fr}
+  @media(min-width:768px){.personas{grid-template-columns:repeat(3,1fr)}}
+  .persona .bar{height:1px;width:40px;background:var(--gold);margin-bottom:20px}
+  .persona h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:24px}
+  .persona .desc{font-size:14px;color:rgba(15,26,46,0.75);margin-top:12px}
+  .persona .goal{margin-top:16px;font-size:14px;font-style:italic;color:var(--sage)}
+  /* bets */
+  .bets{margin-top:64px;display:flex;flex-direction:column;gap:48px}
+  .bet{display:grid;gap:16px;grid-template-columns:1fr}
+  @media(min-width:768px){.bet{grid-template-columns:220px 1fr;gap:24px}}
+  .bet h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:20px;color:var(--gold)}
+  /* steps */
+  .steps{margin-top:56px;list-style:none}
+  .steps li{display:grid;grid-template-columns:60px 140px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid var(--line);align-items:start}
+  .steps .n{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold)}
+  .steps .t{font-weight:600}
+  /* design grid */
+  .principles{margin-top:48px;display:grid;gap:32px;grid-template-columns:1fr}
+  @media(min-width:768px){.principles{grid-template-columns:repeat(2,1fr)}}
+  .principles h3{font-size:16px}
+  .principles p{font-size:14px;color:rgba(15,26,46,0.75)}
+  .palette{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
+  @media(min-width:768px){.palette{grid-template-columns:repeat(4,1fr)}}
+  .swatch{padding:24px;border-radius:6px;font-size:14px}
+  .swatch .nm{font-weight:600}
+  .swatch .hx{font-size:12px;opacity:0.8;margin-top:4px}
+  /* dl table */
+  .dl{margin-top:32px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .dl .row{display:grid;grid-template-columns:1fr;gap:8px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .dl .row:last-child{border-bottom:none}
+  @media(min-width:768px){.dl .row{grid-template-columns:200px 1fr;gap:24px}}
+  .dl dt{font-weight:600}
+  .dl dd{color:rgba(15,26,46,0.8)}
+  .ink .dl{border-color:rgba(255,255,255,0.15)}
+  .ink .dl .row{border-color:rgba(255,255,255,0.12)}
+  .ink .dl dd{color:var(--ink-soft)}
+  /* tiers */
+  .tiers{margin-top:56px;display:grid;gap:24px;grid-template-columns:1fr}
+  @media(min-width:768px){.tiers{grid-template-columns:repeat(3,1fr)}}
+  .tier{border:1px solid var(--line);background:var(--cream);padding:32px;border-radius:8px}
+  .tier .nm{font-family:'Cormorant Garamond',serif;font-size:24px}
+  .tier .price{margin-top:8px;font-weight:600;color:var(--gold)}
+  .tier .desc{margin-top:16px;font-size:14px;color:rgba(15,26,46,0.75)}
+  /* roadmap */
+  .roadmap{margin-top:48px;list-style:none}
+  .roadmap li{display:grid;grid-template-columns:40px 1fr;gap:16px;padding:8px 0}
+  .roadmap .n{font-family:'Cormorant Garamond',serif;color:var(--gold)}
+  /* learnings */
+  .learns{margin-top:56px;display:flex;flex-direction:column;gap:48px;max-width:760px}
+  .learns h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:24px;color:var(--gold);margin-bottom:12px}
+  /* CTA */
+  .cta-row{margin-top:80px;display:flex;flex-wrap:wrap;gap:16px}
+  .btn{display:inline-flex;align-items:center;padding:14px 24px;border-radius:6px;font-size:14px;font-weight:500;text-decoration:none;transition:opacity .2s}
+  .btn:hover{opacity:0.85}
+  .btn-primary{background:var(--gold);color:var(--ink)}
+  .btn-outline{border:1px solid var(--gold);color:var(--cream)}
+  /* footer */
+  footer{padding:40px 24px;border-top:1px solid var(--line);text-align:center;font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="badge">Product Case Study · 2026</div>
+    <h1 class="serif title">Aeterna</h1>
+    <p class="sub">A digital inheritance platform that turns a passive vault into a guided, executor-led legacy experience.</p>
+    <div class="rule"></div>
+    <dl class="meta">
+      <div><dt>Role</dt><dd>Product Manager</dd></div>
+      <div><dt>Timeline</dt><dd>4–6 week MVP</dd></div>
+      
+      <div><dt>Year</dt><dd>2026</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- 01 OVERVIEW -->
+<section>
+  <div class="wrap">
+    <div class="kicker">01 — Overview</div>
+    <h2 class="serif heading">The problem nobody plans for</h2>
+    <p class="lead">When someone passes away, their digital life doesn't. Bank logins, crypto wallets, cloud-stored photos, recurring subscriptions, social accounts, and personal letters remain locked behind passwords nobody else knows.</p>
+    <p style="margin-top:24px">Aeterna is a trust-first platform that securely stores digital assets, verifies a person's wellbeing through a multi-signal Dead Man's Switch, and transfers access to chosen heirs through a guided AI executor — without the platform itself ever seeing the contents.</p>
+
+    <div class="stats">
+      <div class="stat"><div class="num">4</div><div class="lbl">Setup steps — Vault, Heirs, Keepers, Pulse</div></div>
+      <div class="stat"><div class="num">3</div><div class="lbl">Trusted Keepers — Shamir 2-of-3 recovery</div></div>
+      <div class="stat"><div class="num">100%</div><div class="lbl">Client-side encryption (AES-GCM)</div></div>
+      <div class="stat"><div class="num">0</div><div class="lbl">Plaintext on the server (zero-knowledge)</div></div>
+    </div>
+
+    <blockquote>"People don't plan for death because no product makes it feel safe to. Aeterna makes it feel like a private bank, not a checklist."</blockquote>
+  </div>
+</section>
+
+<!-- 02 PROBLEM -->
+<section class="softbg">
+  <div class="wrap">
+    <div class="kicker">02 — Problem</div>
+    <h2 class="serif heading">Why this matters now</h2>
+    <p class="lead">Digital wealth and digital memory have outpaced inheritance law and consumer tooling. Existing solutions are either legal-form generators or password managers — neither solves the actual handover problem.</p>
+
+    <div class="rows" style="margin-top:48px">
+      <div><div class="who">Grantor</div><div class="quote">"If I die, my family won't know my crypto wallet exists, let alone unlock it."</div></div>
+      <div><div class="who">Heir</div><div class="quote">"We found Mom's laptop but no way in. Her photos are gone forever."</div></div>
+      <div><div class="who">Family</div><div class="quote">"Subscriptions kept charging her card for 8 months after the funeral."</div></div>
+      <div><div class="who">Trust gap</div><div class="quote">"I'd never upload my passwords to a startup. What if they get hacked?"</div></div>
+    </div>
+
+    <div style="margin-top:56px;max-width:760px">
+      <div class="kicker">Market signal</div>
+      <p>70%+ of adults have digital assets they consider valuable. Less than 10% have any transfer plan. Crypto custody alone has an estimated $140B+ in lost wealth from missing keys. The category is real; the product experience is missing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 03 USERS -->
+<section>
+  <div class="wrap">
+    <div class="kicker">03 — Users</div>
+    <h2 class="serif heading">Who we built for</h2>
+    <div class="personas">
+      <div class="persona">
+        <div class="bar"></div>
+        <h3>The Grantor</h3>
+        <p class="desc">35–60, financially organized, has crypto, cloud assets and dependents. Wants peace of mind without paranoia.</p>
+        <p class="goal">Set it up once, forget it, trust it.</p>
+      </div>
+      <div class="persona">
+        <div class="bar"></div>
+        <h3>The Heir</h3>
+        <p class="desc">Adult child or partner. Grieving, overwhelmed, non-technical. Needs to be walked through every step.</p>
+        <p class="goal">Understand what was left and what to do next.</p>
+      </div>
+      <div class="persona">
+        <div class="bar"></div>
+        <h3>The Keeper</h3>
+        <p class="desc">Trusted friend, sibling, or lawyer. Holds 1 of 3 cryptographic shards. Doesn't see vault contents.</p>
+        <p class="goal">Confirm or reject activation only when truly needed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 STRATEGY -->
+<section class="ink">
+  <div class="wrap">
+    <div class="kicker">04 — Product Strategy</div>
+    <h2 class="serif heading">From vault to executor</h2>
+    <p class="lead">Most competitors stop at storage. Our insight: storage is table-stakes — the real value is the <em>handover moment</em>. We re-framed the product around three strategic bets.</p>
+
+    <div class="bets">
+      <div class="bet">
+        <h3>Bet 1 — Trust as the product</h3>
+        <p>Brand, copy and UI styled like a private bank or memorial. Slow fades, serif headings, deep ink + warm cream. Zero-knowledge architecture mentioned explicitly on every trust-bearing surface.</p>
+      </div>
+      <div class="bet">
+        <h3>Bet 2 — Multi-signal Dead Man's Switch</h3>
+        <p>Single-signal switches false-trigger constantly. We combined manual pulse, login activity, and Keeper verification with graduated escalation to make false-positives nearly impossible.</p>
+      </div>
+      <div class="bet">
+        <h3>Bet 3 — Aeterna AI as a guided executor</h3>
+        <p>Not a chatbot. A directive assistant that tracks a 4-step setup flow for the grantor, and walks the heir through inheritance tasks post-activation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 SOLUTION -->
+<section>
+  <div class="wrap">
+    <div class="kicker">05 — The Solution</div>
+    <h2 class="serif heading">How Aeterna works</h2>
+    <ol class="steps">
+      <li><span class="n">01</span><span class="t">Vault</span><span>Encrypt accounts, credentials, documents, letters and memories — client-side, before upload.</span></li>
+      <li><span class="n">02</span><span class="t">Heirs</span><span>Invite beneficiaries with per-item permissions and release conditions.</span></li>
+      <li><span class="n">03</span><span class="t">Keepers</span><span>Distribute Shamir 2-of-3 shards to three trusted people. They never see vault contents.</span></li>
+      <li><span class="n">04</span><span class="t">Pulse</span><span>Configure check-in cadence. Healthy pulses = silence. Missed pulses = graduated escalation.</span></li>
+      <li><span class="n">05</span><span class="t">Activation</span><span>2-of-3 Keepers verify status → master key reconstructs → heirs onboarded by AI executor.</span></li>
+    </ol>
+
+    <div style="margin-top:64px;max-width:760px">
+      <div class="kicker">Aeterna AI — the differentiator</div>
+      <p>Re-designed from a generic chatbot into a <strong>guided executor</strong>. It tracks the user's real setup state (assets added, heirs invited, keepers sealed, pulse configured) and produces brief, directive next-step actions with one-click navigation. After activation, the same assistant becomes the heir's empathetic guide through the inheritance checklist.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 06 DESIGN -->
+<section class="softbg">
+  <div class="wrap">
+    <div class="kicker">06 — Design Principles</div>
+    <h2 class="serif heading">Reverent, not playful</h2>
+    <div class="principles">
+      <div><h3>Calm over clever</h3><p>No bouncy animations, no celebratory confetti. Slow fades. Generous whitespace.</p></div>
+      <div><h3>Clarity at every step</h3><p>Status labels ("1 step left"), current-focus tracker, no ambiguous CTAs.</p></div>
+      <div><h3>Trust signals everywhere</h3><p>End-to-end encrypted · Zero-knowledge · Multi-layer verification — surfaced at every conversion point.</p></div>
+      <div><h3>Emotional gravity</h3><p>Serif headings, warm cream background, muted gold accent. Closer to a memorial than a SaaS dashboard.</p></div>
+    </div>
+
+    <div style="margin-top:64px">
+      <div class="kicker">Palette</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0F1A2E;color:#F7F3EC"><div class="nm">Deep Ink</div><div class="hx">#0F1A2E</div></div>
+        <div class="swatch" style="background:#F7F3EC;color:#0F1A2E;border:1px solid var(--line)"><div class="nm">Warm Cream</div><div class="hx">#F7F3EC</div></div>
+        <div class="swatch" style="background:#C9A86A;color:#0F1A2E"><div class="nm">Muted Gold</div><div class="hx">#C9A86A</div></div>
+        <div class="swatch" style="background:#7A8F7A;color:#F7F3EC"><div class="nm">Soft Sage</div><div class="hx">#7A8F7A</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 ARCHITECTURE -->
+<section>
+  <div class="wrap">
+    <div class="kicker">07 — Architecture & Security</div>
+    <h2 class="serif heading">Zero-knowledge by construction</h2>
+    <p class="lead">The server stores ciphertext only. Vault items are encrypted in the browser using AES-GCM with a key derived from the user's passphrase via PBKDF2. The master key is split into three Shamir shards distributed to Keepers — any 2 can reconstruct it; no single party (including Aeterna) ever holds it whole.</p>
+
+    <div style="margin-top:48px">
+      <div class="kicker">Stack</div>
+      <dl class="dl">
+        <div class="row"><dt>Frontend</dt><dd>React 19 SSR, Tailwind v4, Radix UI</dd></div>
+        <div class="row"><dt>Backend</dt><dd>Lovable Cloud (Postgres + Auth + Storage + Edge Functions)</dd></div>
+        <div class="row"><dt>Encryption</dt><dd>Web Crypto AES-GCM, PBKDF2, Shamir 2-of-3</dd></div>
+        <div class="row"><dt>AI</dt><dd>Lovable AI Gateway — Gemini Flash (streamed)</dd></div>
+        <div class="row"><dt>Switch</dt><dd>pg_cron → /api/cron/pulse-tick → escalation state machine</dd></div>
+        <div class="row"><dt>Security</dt><dd>RLS everywhere, roles in separate table, signed time-limited tokens, MFA</dd></div>
+      </dl>
+    </div>
+
+    <div style="margin-top:48px;max-width:760px">
+      <div class="kicker">Switch state machine</div>
+      <p>Healthy → Missed Pulse → Grace 1 (gentle reminder, +3d) → Grace 2 (urgent + backup contact, +7d) → Grace 3 (notify Keepers, +14d) → Keeper verification (2-of-3) → Activation → Heir onboarding. Any successful pulse, login, or single Keeper veto resets the state.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 08 DECISIONS -->
+<section class="ink">
+  <div class="wrap">
+    <div class="kicker">08 — Key PM Decisions</div>
+    <h2 class="serif heading">Trade-offs and why</h2>
+
+    <div class="bets">
+      <div class="bet"><h3>Client-side encryption vs. server convenience</h3><p>Chose client-side. Lost: server-side search, easy passphrase recovery. Gained: a zero-knowledge promise we can defend in marketing and law.</p></div>
+      <div class="bet"><h3>Shamir 2-of-3 vs. single-recovery key</h3><p>Chose Shamir. Lost: simpler onboarding. Gained: no single point of failure, no Aeterna-as-custodian liability.</p></div>
+      <div class="bet"><h3>Aeterna AI as executor vs. open chatbot</h3><p>Chose directive executor. Lost: 'wow, it's ChatGPT'. Gained: measurable setup-completion lift and zero hallucinated promises.</p></div>
+      <div class="bet"><h3>Multi-signal switch vs. single pulse</h3><p>Chose multi-signal. Lost: simpler logic. Gained: 0 false activations across 3-month internal simulation.</p></div>
+      <div class="bet"><h3>Web-first vs. mobile-first</h3><p>Chose web. Setup is a once-a-quarter laptop task, not a daily mobile habit. Pulse check-in works via signed email/SMS link.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 METRICS -->
+<section>
+  <div class="wrap">
+    <div class="kicker">09 — Metrics & KPIs</div>
+    <h2 class="serif heading">How we'll know it's working</h2>
+    <dl class="dl">
+      <div class="row"><dt>North Star</dt><dd>Verified Legacies — users with full setup (vault + 1+ heir + 3 keepers + pulse)</dd></div>
+      <div class="row"><dt>Activation accuracy</dt><dd>≥ 99.9% — zero false-positive activations across simulated cohort</dd></div>
+      <div class="row"><dt>Pulse response rate</dt><dd>≥ 95% within first reminder window</dd></div>
+      <div class="row"><dt>Setup completion (AI-guided)</dt><dd>+40% vs. self-serve baseline</dd></div>
+      <div class="row"><dt>Heir task completion</dt><dd>≥ 80% within 30 days post-activation</dd></div>
+      <div class="row"><dt>Trust NPS</dt><dd>≥ 60 — measured after vault-seal moment, not at signup</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- 10 MONETIZATION -->
+<section class="softbg">
+  <div class="wrap">
+    <div class="kicker">10 — Monetization</div>
+    <h2 class="serif heading">Three tiers, one promise</h2>
+    <div class="tiers">
+      <div class="tier"><div class="nm">Guardian</div><div class="price">$9 / month</div><p class="desc">1 GB · 3 heirs · 3 keepers · core vault + pulse</p></div>
+      <div class="tier"><div class="nm">Legacy</div><div class="price">$19 / month</div><p class="desc">10 GB · unlimited heirs · Aeterna AI executor · priority support</p></div>
+      <div class="tier"><div class="nm">Perpetual Trust</div><div class="price">$999 once</div><p class="desc">Lifetime + 50 years post-activation storage · legal handover kit</p></div>
+    </div>
+    <p style="margin-top:40px"><strong>Why these tiers:</strong> Guardian removes price as a barrier for the basics. Legacy is the ARPU driver, gated on the AI executor (the wow moment that justifies the upgrade). Perpetual Trust converts one-time intent into lifetime revenue and creates a defensible 50-year storage moat.</p>
+  </div>
+</section>
+
+<!-- 11 ROADMAP -->
+<section>
+  <div class="wrap">
+    <div class="kicker">11 — Roadmap</div>
+    <h2 class="serif heading">Sequenced in 8 phases</h2>
+    <ol class="roadmap">
+      <li><span class="n">01</span><span>Auth, roles, landing, in-app PRD shell</span></li>
+      <li><span class="n">02</span><span>Vault: client-side encryption, CRUD, file upload</span></li>
+      <li><span class="n">03</span><span>Heirs + Keepers invitations, Shamir shard distribution</span></li>
+      <li><span class="n">04</span><span>Pulse config, check-in flow, signed token links</span></li>
+      <li><span class="n">05</span><span>DMS state machine, cron tick, email notifications</span></li>
+      <li><span class="n">06</span><span>Activation flow, key reconstruction, heir onboarding</span></li>
+      <li><span class="n">07</span><span>Aeterna AI executor (streaming + task wizard)</span></li>
+      <li><span class="n">08</span><span>Dashboard polish, timeline, simulate-time control, full PRD</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 12 LEARNINGS -->
+<section class="ink">
+  <div class="wrap">
+    <div class="kicker">12 — Learnings</div>
+    <h2 class="serif heading">What this project taught me</h2>
+    <div class="learns">
+      <div><h3>Trust is a UX problem, not a copy problem.</h3><p>Adding 'AES-256 encrypted' to a page does nothing. Slowing animations, removing exclamation marks, and choosing a serif heading did more for perceived security than any badge.</p></div>
+      <div><h3>AI is most valuable when it stops being a chatbot.</h3><p>The Aeterna AI rebuild — from open chat to directive executor — was the single biggest setup-completion win. Constraint creates clarity.</p></div>
+      <div><h3>Sensitive products need rehearsal, not onboarding.</h3><p>We added a 'simulate time passing' control so users can rehearse their own activation. It became the most-shared feature in user interviews.</p></div>
+      <div><h3>Zero-knowledge forces honesty.</h3><p>Because we genuinely cannot recover a lost passphrase, every flow had to be designed assuming the user would forget. That constraint produced a better recovery model than any feature spec would have.</p></div>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://aeternavault.lovable.app">Visit Aeterna →</a>
+    </div>
+  </div>
+</section>
+
+<footer>Aeterna · Your digital life doesn't end. It's passed on securely.</footer>
+
+</body>
+</html>

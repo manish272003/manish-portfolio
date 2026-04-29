@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Mini Ira — Product Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root{
+    --ink:#0b0b10; --paper:#fbfaf7; --muted:#6b6b76; --line:#e7e4dc;
+    --accent:#ff6a3d; --accent2:#ffd166; --pill:#f1efe8; --good:#2f9e6b;
+  }
+  html,body{background:var(--paper); color:var(--ink); font-family:'Inter',ui-sans-serif,system-ui,sans-serif;}
+  .serif{font-family:'Fraunces',Georgia,serif; letter-spacing:-0.01em;}
+  .mono{font-family:'JetBrains Mono',ui-monospace,monospace;}
+  .pill{background:var(--pill); border:1px solid var(--line); padding:.25rem .65rem; border-radius:9999px; font-size:.72rem; font-weight:500; color:#3a3a44;}
+  .chip-dark{background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); padding:.3rem .7rem; border-radius:9999px; font-size:.72rem; color:#fff;}
+  .card{background:#fff; border:1px solid var(--line); border-radius:18px;}
+  .hairline{border-top:1px solid var(--line);}
+  .num{font-family:'Fraunces',serif; font-weight:600;}
+  .kicker{letter-spacing:.18em; text-transform:uppercase; font-size:.7rem; color:#8a8a92; font-weight:600;}
+  .grid-bg{
+    background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .blob{position:absolute; border-radius:9999px; filter:blur(80px); opacity:.55; pointer-events:none;}
+  .arrow::after{content:"→"; margin-left:.4rem;}
+  .swatch{width:14px;height:14px;border-radius:4px;display:inline-block;vertical-align:middle;margin-right:6px;border:1px solid rgba(0,0,0,.08);}
+  details>summary{cursor:pointer; list-style:none;}
+  details>summary::-webkit-details-marker{display:none;}
+  @media print {
+    .no-print{display:none !important;}
+    section{break-inside:avoid; page-break-inside:avoid;}
+    .page-break{page-break-before:always;}
+    body{background:#fff;}
+    .card{box-shadow:none !important;}
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ======================== COVER ======================== -->
+<section class="relative overflow-hidden text-white" style="background:#0b0b10;">
+  <div class="absolute inset-0 grid-bg opacity-50"></div>
+  <div class="blob" style="background:#ff6a3d; width:520px; height:520px; top:-160px; left:-120px;"></div>
+  <div class="blob" style="background:#7c5cff; width:480px; height:480px; bottom:-180px; right:-120px;"></div>
+
+  <div class="relative max-w-6xl mx-auto px-8 py-20 md:py-28">
+    <div class="flex items-center gap-3 mb-8">
+      <div class="w-9 h-9 rounded-xl bg-white text-black flex items-center justify-center serif font-bold">I</div>
+      <span class="text-sm tracking-wide text-white/70">Mini Ira · Product Case Study</span>
+    </div>
+
+    <p class="kicker text-white/50 mb-5">A Product Manager's Perspective</p>
+
+    <h1 class="serif text-5xl md:text-7xl leading-[1.02] font-semibold max-w-4xl">
+      Building a friend in your pocket — one who actually <em class="italic text-[var(--accent2)]">notices</em> how you feel.
+    </h1>
+
+    <p class="mt-7 text-lg md:text-xl text-white/75 max-w-2xl leading-relaxed">
+      Mini Ira is an emotionally-aware AI companion that listens, reads the room, and gently nudges users toward calm —
+      sometimes through words, sometimes through a 30-second 3D mini-game.
+    </p>
+
+    <div class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
+      <div><div class="text-white/50 text-xs uppercase tracking-widest mb-1">Role</div><div class="font-medium">Product Manager</div></div>
+      <div><div class="text-white/50 text-xs uppercase tracking-widest mb-1">Team</div><div class="font-medium">Solo · AI-assisted build</div></div>
+      <div><div class="text-white/50 text-xs uppercase tracking-widest mb-1">Timeline</div><div class="font-medium">~2 weeks · MVP</div></div>
+      <div><div class="text-white/50 text-xs uppercase tracking-widest mb-1">Status</div><div class="font-medium">Shipped · iterating</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== TL;DR ======================== -->
+<section class="max-w-6xl mx-auto px-8 py-20">
+  <p class="kicker mb-4">TL;DR</p>
+  <h2 class="serif text-3xl md:text-5xl leading-tight max-w-4xl">
+    Most mental-wellness apps feel like a clinic. Mini Ira feels like a text from a friend who gets it — and hands you a tiny game when words aren't enough.
+  </h2>
+  <div class="mt-10 grid md:grid-cols-3 gap-5">
+    <div class="card p-6">
+      <div class="num text-4xl">6</div>
+      <div class="mt-2 font-medium">Emotional states</div>
+      <p class="text-sm text-[var(--muted)] mt-1">Detected in real-time from every reply and tagged invisibly for the system.</p>
+    </div>
+    <div class="card p-6">
+      <div class="num text-4xl">2</div>
+      <div class="mt-2 font-medium">Mood-triggered 3D games</div>
+      <p class="text-sm text-[var(--muted)] mt-1">Endless Runner for stress, Bubble Pop for sadness — Ira picks, the user just plays.</p>
+    </div>
+    <div class="card p-6">
+      <div class="num text-4xl">1</div>
+      <div class="mt-2 font-medium">Conversational tone</div>
+      <p class="text-sm text-[var(--muted)] mt-1">Warm, casual, emoji-friendly. No bullet points. No clinical language. Ever.</p>
+    </div>
+  </div>
+</section>
+
+<div class="hairline"></div>
+
+<!-- ======================== PROBLEM ======================== -->
+<section class="max-w-6xl mx-auto px-8 py-20">
+  <div class="grid md:grid-cols-12 gap-10">
+    <div class="md:col-span-4">
+      <p class="kicker mb-3">01 · Problem</p>
+      <h2 class="serif text-4xl md:text-5xl leading-tight">Wellness apps are intimidating exactly when you need them most.</h2>
+    </div>
+    <div class="md:col-span-8 space-y-6">
+      <p class="text-lg leading-relaxed text-[#2a2a30]">
+        When someone is anxious at 1AM, they don't want to fill a PHQ-9 form, schedule a session, or read a 6-step guide on box breathing.
+        They want a human voice. They want something to <em>do</em> with their hands. They want the loop in their head to stop, even for 60 seconds.
+      </p>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="card p-5">
+          <div class="font-medium mb-1">Clinical tone barrier</div>
+          <p class="text-sm text-[var(--muted)]">Bullet-pointed advice from a chatbot lands like a pamphlet. It widens the gap rather than closing it.</p>
+        </div>
+        <div class="card p-5">
+          <div class="font-medium mb-1">Decision fatigue</div>
+          <p class="text-sm text-[var(--muted)]">"Pick a meditation / pick a breathing exercise / pick a journal prompt." Distressed users don't want to pick.</p>
+        </div>
+        <div class="card p-5">
+          <div class="font-medium mb-1">No physical escape valve</div>
+          <p class="text-sm text-[var(--muted)]">Talk-only apps trap users in their own head. Sometimes you need something tactile to reset.</p>
+        </div>
+        <div class="card p-5">
+          <div class="font-medium mb-1">Memory amnesia</div>
+          <p class="text-sm text-[var(--muted)]">Most chatbots forget you the second you close the tab. There's no "we" — only repeated strangers.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hairline"></div>
+
+<!-- ======================== USERS ======================== -->
+<section class="max-w-6xl mx-auto px-8 py-20">
+  <p class="kicker mb-3">02 · Users</p>
+  <h2 class="serif text-4xl md:text-5xl leading-tight max-w-3xl">Who is Mini Ira really for?</h2>
+  <p class="text-[var(--muted)] mt-4 max-w-2xl">Two primary personas surfaced from problem interviews and competitor reviews. Both share one Job-To-Be-Done: <em>"Help me get out of my head, fast."</em></p>
+
+  <div class="mt-10 grid md:grid-cols-2 gap-6">
+    <div class="card p-7">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-2xl">🎓</div>
+        <div>
+          <div class="serif text-xl font-semibold">Maya, 21</div>
+          <div class="text-sm text-[var(--muted)]">Final-year student · chronic exam stress</div>
+        </div>
+      </div>
+      <p class="text-sm leading-relaxed">Opens the app at 2AM during deadline weeks. Doesn't want a journal. Wants someone to say "you're allowed to take a break" and hand her a 60-second distraction.</p>
+      <div class="mt-4 hairline pt-4">
+        <div class="kicker mb-2">JTBD</div>
+        <p class="text-sm">When I'm spiraling before a deadline, I want a quick mental reset, so I can sleep without doom-scrolling.</p>
+      </div>
+    </div>
+
+    <div class="card p-7">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 rounded-full bg-violet-100 flex items-center justify-center text-2xl">💼</div>
+        <div>
+          <div class="serif text-xl font-semibold">Arjun, 28</div>
+          <div class="text-sm text-[var(--muted)]">Remote engineer · low-grade loneliness</div>
+        </div>
+      </div>
+      <p class="text-sm leading-relaxed">Lives alone in a new city. Doesn't feel "sick enough" for therapy but ends most days flat. Wants something warm in the gap between Slack closing and sleep.</p>
+      <div class="mt-4 hairline pt-4">
+        <div class="kicker mb-2">JTBD</div>
+        <p class="text-sm">When my day ends quietly, I want to feel seen by something, so the silence doesn't sit so heavy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hairline"></div>
+
+<!-- ======================== VISION + NORTH STAR ======================== -->
+<section class="max-w-6xl mx-auto px-8 py-20">
+  <div class="grid md:grid-cols-12 gap-10 items-start">
+    <div class="md:col-span-5">
+      <p class="kicker mb-3">03 · Vision</p>
+      <h2 class="serif text-4xl md:text-5xl leading-tight">A friend in your pocket who notices how you feel.</h2>
+      <p class="text-[var(--muted)] mt-5 leading-relaxed">Not a therapist. Not a coach. A presence — warm, casual, available, and honest about what it is.</p>
+    </div>
+    <div class="md:col-span-7">
+      <div class="card p-7">
+        <div class="kicker mb-2">North Star Metric</div>
+        <div class="serif text-3xl md:text-4xl leading-tight">Weekly Emotionally-Anchored Sessions per User</div>
+        <p class="text-sm text-[var(--muted)] mt-3">A "session" counts only if it includes (a) a detected emotion and (b) at least one Ira reply or game completion. This filters out idle opens and rewards real engagement.</p>
+        <div class="grid grid-cols-3 gap-4 mt-6">
+          <div><div class="kicker mb-1">Input</div><div class="text-sm font-medium">Daily active users</div></div>
+          <div><div class="kicker mb-1">Input</div><div class="text-sm font-medium">Avg. messages / session</div></div>
+          <div><div class="kicker mb-1">Guardrail</div><div class="text-sm font-medium">Mood-improvement Δ</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hairline"></div>
+
+<!-- ======================== COMPETITIVE LANDSCAPE ======================== -->
+<section class="max-w-6xl mx-auto px-8 py-20">
+  <p class="kicker mb-3">04 · Landscape</p>
+  <h2 class="serif text-4xl md:text-5xl leading-tight max-w-3xl">Where Mini Ira sits in the market.</h2>
+  <div class="mt-8 overflow-x-auto card">
+    <table class="w-full text-sm">
+      <thead class="text-left text-xs uppercase tracking-wider text-[var(--muted)] bg-[var(--pill)]">
+        <tr><th class="px-5 py-4">Product</th><th class="px-5 py-4">Tone</th><th class="px-5 py-4">Memory</th><th class="px-5 py-4">Active intervention</th><th class="px-5 py-4">Friction</th></tr>
+      </thead>
+      <tbody class="divide-y divide-[var(--line)]">
+        <tr><td class="px-5 py-4 font-medium">Wysa</td><td class="px-5 py-4">CBT-clinical</td><td class="px-5 py-4">Light</td><td class="px-5 py-4">Exercises</td><td class="px-5 py-4">Heavy menus</td></tr>
+        <tr><td class="px-5 py-4 font-medium">Replika</td><td class="px-5 py-4">Romantic / role-play</td><td class="px-5 py-4">Strong</td><td class="px-5 py-4">None</td><td class="px-5 py-4">Identity confusion</td></tr>
+        <tr><td class="px-5 py-4 font-medium">Woebot</td><td class="px-5 py-4">Scripted CBT</td><td class="px-5 py-4">Light</td><td class="px-5 py-4">Lessons</td><td class="px-5 py-4">Repetitive</td></tr>
+        <tr><td class="px-5 py-4 font-medium">Calm</td><td class="px-5 py-4">Content library</td><td class="px-5 py-4">None</td><td class="px-5 py-4">Audio</td><td class="px-5 py-4">Picker overload</td></tr>
+        <tr class="bg-orange-50/60"><td class="px-5 py-4 font-semibold">Mini Ira</td><td class="px-5 py-4">Best-friend casual</td><td class="px-5 py-4">Conversation + mood history</td><td class="px-5 py-4">3D micro-games auto-picked</td><td class="px-5 py-4">Near-zero</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="hairline"></div>
+
+<!-- ======================== SOLUTION OVERVIEW ======================== -->
+<section class="max-w-6xl mx-auto px-8 py-20">
+  <p class="kicker mb-3">05 · Solution</p>
+  <h2 class="serif text-4xl md:text-5xl leading-tight max-w-3xl">Five pillars, one feeling: <em>"someone's actually here."</em></h2>
+
+  <div class="mt-10 grid md:grid-cols-5 gap-4">
+    <div class="card p-5"><div class="text-2xl">💬</div><div class="font-medium mt-2">Ira AI</div><p class="text-xs text-[var(--muted)] mt-1">Best-friend tone, never clinical.</p></div>
+    <div class="card p-5"><div class="text-2xl">🧠</div><div class="font-medium mt-2">Emotion engine</div><p class="text-xs text-[var(--muted)] mt-1">Tags every reply across 6 states.</p></div>
+    <div class="card p-5"><div class="text-2xl">🎮</div><div class="font-medium mt-2">Mood-picked games</div><p class="text-xs text-[var(--muted)] mt-1">Ira chooses; user just plays.</p></div>
+    <div class="card p-5"><div class="text-2xl">💌</div><div class="font-medium mt-2">Future-self notes</div><p class="text-xs text-[var(--muted)] mt-1">Resurfaced when low.</p></div>
+    <div class="card p-5"><div class="text-2xl">📈</div><div class="font-medium mt-2">Mood insights</div><p class="text-xs text-[var(--muted)] mt-1">Pattern visibility, not judgment.</p></div>
+  </div>
+</section>
+
+<div class="hairline"></div>
+
+<!-- ======================== FEATURES DEEP DIVE ======================== -->
+<section class="max-w-6xl mx-auto px-8 py-20">
+  <p class="kicker mb-3">06 · Features</p>
+  <h2 class="serif text-4xl md:text-5xl leading-tight">Deep dive into what we shipped.</h2>
+
+  <div class="mt-10 space-y-5">
+    <div class="card p-7">
+      <div class="flex items-start justify-between gap-6 flex-wrap">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-3"><span class="pill">Core</span><h3 class="serif text-2xl">Ira — the voice</h3></div>
+          <p class="text-[var(--muted)] mt-3">Every prompt enforces a "best friend texting" persona. 1–4 sentences. Emojis welcome. No bullets, no numbered lists, no clinical phrasing. Ira matches the user's energy — terse if they're terse, expansive if they open up.</p>
+        </div>
+        <div class="text-sm text-[var(--muted)] max-w-xs">
+          <div class="kicker mb-1">User value</div>
+          Talking to Ira feels like talking to a person — not consulting a tool.
+        </div>
+      </div>
+    </div>
+
+    <div class="card p-7">
+      <div class="flex items-start justify-between gap-6 flex-wrap">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-3"><span class="pill">AI</span><h3 class="serif text-2xl">Real-time emotion tagging</h3></div>
+          <p class="text-[var(--muted)] mt-3">Every assistant reply begins with a hidden <span class="mono text-xs">[EMOTION:xxx]</span> tag. The frontend strips it, displays the corresponding mood chip, and logs it to the user's emotional history. Six states: happy, sad, stressed, excited, lonely, neutral.</p>
+        </div>
+        <div class="text-sm text-[var(--muted)] max-w-xs">
+          <div class="kicker mb-1">Why it matters</div>
+          Powers personalization, pattern detection, and the right-game-at-the-right-time logic.
+        </div>
+      </div>
+    </div>
+
+    <div class="card p-7">
+      <div class="flex items-start justify-between gap-6 flex-wrap">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-3"><span class="pill">Differentiator</span><h3 class="serif text-2xl">Mood-triggered 3D games</h3></div>
+          <p class="text-[var(--muted)] mt-3">Two purpose-built micro-games rendered inline in the chat:</p>
+          <ul class="mt-3 text-sm space-y-2">
+            <li>🏃 <strong>Endless Runner</strong> — for <em>stressed, anxious, happy, excited, neutral</em>. Burn or ride the energy.</li>
+            <li>🫧 <strong>Bubble Pop</strong> — for <em>sad, lonely</em>. Soft, satisfying, low-stakes.</li>
+          </ul>
+          <p class="text-[var(--muted)] mt-3">Ira <em>chooses</em> based on detected mood. The user never sees a picker.</p>
+        </div>
+        <div class="text-sm text-[var(--muted)] max-w-xs">
+          <div class="kicker mb-1">PM bet</div>
+          A 30-second physical loop interrupts rumination better than another text reply.
+        </div>
+      </div>
+    </div>
+
+    <div class="card p-7">
+      <div class="flex items-start justify-between gap-6 flex-wrap">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-3"><span class="pill">Memory</span><h3 class="serif text-2xl">Future-self messages</h3></div>
+          <p class="text-[var(--muted)] mt-3">In good moments, users write a note to their future self. Ira holds it, and gently surfaces it later when the system detects 2+ recent low-mood interactions. The user becomes their own caregiver.</p>
+        </div>
+        <div class="text-sm text-[var(--muted)] max-w-xs">
+          <div class="kicker mb-1">Magic moment</div>
+          A line you wrote yourself, returning exactly when you need it.
+        </div>
+      </div>
+    </div>
+
+    <div class="card p-7">
+      <div class="flex items-start justify-between gap-6 flex-wrap">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-3"><span class="pill">Insights</span><h3 class="serif text-2xl">Mood dashboard & history</h3></div>
+          <p class="text-[var(--muted)] mt-3">Personal trend view across the last 20 interactions. No scoring, no judgment — just visibility. Ira also adapts its tone when negative-mood streaks build up.</p>
+        </div>
+        <div class="text-sm text-[var(--muted)] max-w-xs">
+          <div class="kicker mb-1">Outcome</div>
+          Self-awareness without anxiety.
+        </div>
+      </div>
+    </div>
+
+    <div class="card p-7">
+      <div class="flex items-start justify-between gap-6 flex-wrap">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-3"><span class="pill">Continuity</span><h3 class="serif text-2xl">Conversations that persist</h3></div>
+          <p class="text-[var(--muted)] mt-3">Authenticated users get conversation history, sidebar navigation, and the ability to resume where they left off. Ira remembers your name once shared.</p>
+        </div>
+        <div class="text-sm text-[var(--muted)] max-w-xs">
+          <div class="kicker mb-1">Why</div>
+          A friend who forgets you isn't a friend.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hairline"></div>
+
+<!-- ======================== DECISIONS ======================== -->
+<section class="max-w-6xl mx-auto px-8 py-20">
+  <p class="kicker mb-3">07 · Decisions</p>
+  <h2 class="serif text-4xl md:text-5xl leading-tight max-w-3xl">Key product decisions & the trade-offs behind them.</h2>
+
+  <div class="mt-10 grid md:grid-cols-2 gap-5">
+    <div class="card p-6">
+      <div class="serif text-xl">Ira picks the game, not the user</div>
+      <p class="text-sm text-[var(--muted)] mt-2"><strong>Trade-off:</strong> less control, more magic.</p>
+      <p class="text-sm mt-3">Distressed users hate menus. Letting Ira auto-route to Endless Runner or Bubble Pop based on detected mood removes friction at the worst possible moment.</p>
+    </div>
+    <div class="card p-6">
+      <div class="serif text-xl">Cut Zen Ball — kept only 2 games</div>
+      <p class="text-sm text-[var(--muted)] mt-2"><strong>Trade-off:</strong> less variety, more polish.</p>
+      <p class="text-sm mt-3">Three half-good games > two great games — wrong. Two games map cleanly to the two emotional clusters that matter most: high-arousal vs low-arousal distress.</p>
+    </div>
+    <div class="card p-6">
+      <div class="serif text-xl">Killed the "1-sentence only" rule</div>
+      <p class="text-sm text-[var(--muted)] mt-2"><strong>Trade-off:</strong> longer replies, warmer experience.</p>
+      <p class="text-sm mt-3">Forcing Ira to one sentence felt robotic. Users want a friend who actually <em>responds</em> — not a fortune cookie.</p>
+    </div>
+    <div class="card p-6">
+      <div class="serif text-xl">Lovable Cloud over self-hosting</div>
+      <p class="text-sm text-[var(--muted)] mt-2"><strong>Trade-off:</strong> platform lock-in, faster shipping.</p>
+      <p class="text-sm mt-3">For an MVP testing emotional product-market fit, days-to-first-user beats infrastructure purity.</p>
+    </div>
+    <div class="card p-6">
+      <div class="serif text-xl">Hidden emotion tags vs visible scoring</div>
+      <p class="text-sm text-[var(--muted)] mt-2"><strong>Trade-off:</strong> less transparency, more dignity.</p>
+      <p class="text-sm mt-3">Showing users their "anxiety score" creates anxiety. We tag silently, surface gently in the dashboard.</p>
+    </div>
+    <div class="card p-6">
+      <div class="serif text-xl">Auth required for memory, not for try</div>
+      <p class="text-sm text-[var(--muted)] mt-2"><strong>Trade-off:</strong> some friction, full data integrity.</p>
+      <p class="text-sm mt-3">Anyone can land and read. Sending a message gates auth — protecting RLS-secured emotional data while keeping the door open.</p>
+    </div>
+  </div>
+</section>
+
+<div class="hairline"></div>
+
+<!-- ======================== FLOW ======================== -->
+<section class="max-w-6xl mx-auto px-8 py-20">
+  <p class="kicker mb-3">08 · Core flow</p>
+  <h2 class="serif text-4xl md:text-5xl leading-tight">From "I'm stressed" to "I feel a little lighter" in under 90 seconds.</h2>
+
+  <div class="mt-10 card p-8 overflow-x-auto">
+    <div class="flex items-stretch gap-3 min-w-[820px] text-sm">
+      <div class="flex-1 rounded-xl border border-[var(--line)] p-4 bg-[var(--pill)]">
+        <div class="kicker mb-1">1 · Open</div>
+        <div class="font-medium">User lands on Mini Ira</div>
+        <p class="text-xs text-[var(--muted)] mt-1">Hero input, no menu.</p>
+      </div>
+      <div class="self-center text-2xl text-[var(--muted)]">→</div>
+      <div class="flex-1 rounded-xl border border-[var(--line)] p-4 bg-[var(--pill)]">
+        <div class="kicker mb-1">2 · Type</div>
+        <div class="font-medium">"I'm so overwhelmed."</div>
+        <p class="text-xs text-[var(--muted)] mt-1">Streamed to edge function.</p>
+      </div>
+      <div class="self-center text-2xl text-[var(--muted)]">→</div>
+      <div class="flex-1 rounded-xl border border-[var(--line)] p-4 bg-[var(--pill)]">
+        <div class="kicker mb-1">3 · Detect</div>
+        <div class="font-medium">Emotion = stressed</div>
+        <p class="text-xs text-[var(--muted)] mt-1">Tagged + logged silently.</p>
+      </div>
+      <div class="self-center text-2xl text-[var(--muted)]">→</div>
+      <div class="flex-1 rounded-xl border border-[var(--line)] p-4 bg-orange-50">
+        <div class="kicker mb-1">4 · Respond</div>
+        <div class="font-medium">Ira: "Let's burn that off — run it out 🏃"</div>
+        <p class="text-xs text-[var(--muted)] mt-1">Inline 3D game launches.</p>
+      </div>
+      <div class="self-center text-2xl text-[var(--muted)]">→</div>
+      <div class="flex-1 rounded-xl border border-[var(--line)] p-4 bg-[var(--pill)]">
+        <div class="kicker mb-1">5 · Reset</div>
+        <div class="font-medium">60 sec of play</div>
+        <p class="text-xs text-[var(--muted)] mt-1">Loop interrupted.</p>
+      </div>
+      <div class="self-center text-2xl text-[var(--muted)]">→</div>
+      <div class="flex-1 rounded-xl border border-[var(--line)] p-4 bg-emerald-50">
+        <div class="kicker mb-1">6 · Reflect</div>
+        <div class="font-medium">Mood logged</div>
+        <p class="text-xs text-[var(--muted)] mt-1">Visible in dashboard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hairline"></div>
+
+<!-- ======================== ARCH ======================== -->
+<section class="max-w-6xl mx-auto px-8 py-20">
+  <p class="kicker mb-3">09 · Architecture</p>
+  <h2 class="serif text-4xl md:text-5xl leading-tight">How it's wired, in plain language.</h2>
+
+  <div class="mt-10 grid md:grid-cols-3 gap-5">
+    <div class="card p-6">
+      <div class="kicker mb-2">Frontend</div>
+      <div class="serif text-xl">React 18 + Vite + Three.js</div>
+      <p class="text-sm text-[var(--muted)] mt-2">Streaming chat UI, 3D games rendered inline via <span class="mono text-xs">react-three-fiber</span>, Tailwind design tokens.</p>
+    </div>
+    <div class="card p-6">
+      <div class="kicker mb-2">Brain</div>
+      <div class="serif text-xl">Lovable AI Gateway</div>
+      <p class="text-sm text-[var(--muted)] mt-2">Gemini 3 Flash for fast, warm responses. System prompt enforces persona, emotion tagging, and game mapping.</p>
+    </div>
+    <div class="card p-6">
+      <div class="kicker mb-2">Backend</div>
+      <div class="serif text-xl">Lovable Cloud</div>
+      <p class="text-sm text-[var(--muted)] mt-2">Edge function for streaming, Postgres with row-level security for conversations, emotional logs, and future-self messages.</p>
+    </div>
+  </div>
+
+  <div class="mt-6 card p-6">
+    <div class="kicker mb-3">Data model (simplified)</div>
+    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+      <div class="rounded-lg border border-[var(--line)] p-3"><div class="font-semibold">conversations</div><div class="text-xs text-[var(--muted)]">id · user_id · user_name</div></div>
+      <div class="rounded-lg border border-[var(--line)] p-3"><div class="font-semibold">messages</div><div class="text-xs text-[var(--muted)]">role · content · detected_emotion</div></div>
+      <div class="rounded-lg border border-[var(--line)] p-3"><div class="font-semibold">emotional_logs</div><div class="text-xs text-[var(--muted)]">user_id · emotion · created_at</div></div>
+      <div class="rounded-lg border border-[var(--line)] p-3"><div class="font-semibold">future_self_messages</div><div class="text-xs text-[var(--muted)]">message · surfaced</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="hairline"></div>
+
+<!-- ======================== METRICS ======================== -->
+<section class="max-w-6xl mx-auto px-8 py-20">
+  <p class="kicker mb-3">10 · Metrics</p>
+  <h2 class="serif text-4xl md:text-5xl leading-tight">How we'll know it's working.</h2>
+
+  <div class="mt-10 grid md:grid-cols-3 gap-5">
+    <div class="card p-6">
+      <div class="kicker mb-2">North Star</div>
+      <div class="serif text-2xl leading-tight">Weekly emotionally-anchored sessions / user</div>
+    </div>
+    <div class="card p-6">
+      <div class="kicker mb-2">Inputs</div>
+      <ul class="text-sm mt-1 space-y-1.5">
+        <li>· Daily active users</li>
+        <li>· Avg messages / session</li>
+        <li>· Game launch rate</li>
+        <li>· Future-self note creation</li>
+      </ul>
+    </div>
+    <div class="card p-6">
+      <div class="kicker mb-2">Guardrails</div>
+      <ul class="text-sm mt-1 space-y-1.5">
+        <li>· Mood-improvement Δ (pre→post session)</li>
+        <li>· 7-day retention</li>
+        <li>· Game completion rate</li>
+        <li>· Crisis-keyword escalation rate</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="hairline"></div>
+
+<!-- ======================== LEARNINGS ======================== -->
+<section class="max-w-6xl mx-auto px-8 py-20">
+  <p class="kicker mb-3">11 · Learnings</p>
+  <h2 class="serif text-4xl md:text-5xl leading-tight max-w-3xl">What I'd carry into the next product.</h2>
+
+  <div class="mt-10 space-y-5">
+    <div class="card p-6">
+      <div class="serif text-xl">1 · Tone is a feature, not a polish pass.</div>
+      <p class="text-sm text-[var(--muted)] mt-2">The single biggest unlock wasn't a new feature — it was deleting the "one sentence only" rule. The product became <em>warmer</em> overnight. In emotional products, tone is the product.</p>
+    </div>
+    <div class="card p-6">
+      <div class="serif text-xl">2 · Remove choice when users are dysregulated.</div>
+      <p class="text-sm text-[var(--muted)] mt-2">Letting Ira pick the game (instead of showing a menu) was a small change with outsized UX impact. Defaults are kindness.</p>
+    </div>
+    <div class="card p-6">
+      <div class="serif text-xl">3 · Micro-interventions {'>'} long content.</div>
+      <p class="text-sm text-[var(--muted)] mt-2">A 30-second tactile game beats a 5-minute meditation for users in acute states. Build for the worst minute of someone's day.</p>
+    </div>
+    <div class="card p-6">
+      <div class="serif text-xl">4 · Scope discipline kept the soul.</div>
+      <p class="text-sm text-[var(--muted)] mt-2">Saying no to a third game, an avatar, voice mode, and journaling templates kept the product readable. An MVP that does one feeling well beats one that does five things mediocrely.</p>
+    </div>
+  </div>
+</section>
+
+<div class="hairline"></div>
+
+<!-- ======================== ROADMAP ======================== -->
+<section class="max-w-6xl mx-auto px-8 py-20">
+  <p class="kicker mb-3">12 · Roadmap</p>
+  <h2 class="serif text-4xl md:text-5xl leading-tight">Now · Next · Later.</h2>
+
+  <div class="mt-10 grid md:grid-cols-3 gap-5">
+    <div class="card p-6">
+      <div class="kicker mb-2">Now (this sprint)</div>
+      <ul class="text-sm space-y-2 mt-2">
+        <li>· Breathing exercise (animated circle) for high-anxiety detections</li>
+        <li>· Google OAuth onboarding</li>
+        <li>· Daily mood check-in on app open</li>
+      </ul>
+    </div>
+    <div class="card p-6">
+      <div class="kicker mb-2">Next (4–8 wks)</div>
+      <ul class="text-sm space-y-2 mt-2">
+        <li>· Voice input + voice replies</li>
+        <li>· Weekly mood digest email</li>
+        <li>· Crisis-keyword safe-routing to helplines</li>
+        <li>· Third game candidate testing</li>
+      </ul>
+    </div>
+    <div class="card p-6">
+      <div class="kicker mb-2">Later (quarter+)</div>
+      <ul class="text-sm space-y-2 mt-2">
+        <li>· Privacy-safe shareable mood snapshots</li>
+        <li>· Therapist-handoff bridge (opt-in)</li>
+        <li>· On-device emotion model for offline support</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="hairline"></div>
+
+<!-- ======================== APPENDIX ======================== -->
+<section class="max-w-6xl mx-auto px-8 py-20">
+  <p class="kicker mb-3">Appendix</p>
+  <h2 class="serif text-4xl md:text-5xl leading-tight">Reference.</h2>
+
+  <div class="mt-10 grid md:grid-cols-2 gap-5">
+    <div class="card p-6">
+      <div class="kicker mb-3">Emotion taxonomy</div>
+      <div class="grid grid-cols-2 gap-2 text-sm">
+        <div>😊 Happy</div><div>😢 Sad</div>
+        <div>😰 Stressed</div><div>🎉 Excited</div>
+        <div>🥺 Lonely</div><div>😌 Neutral</div>
+      </div>
+    </div>
+    <div class="card p-6">
+      <div class="kicker mb-3">Game ↔ mood map</div>
+      <ul class="text-sm space-y-1.5">
+        <li>🏃 Endless Runner — stressed · happy · excited · neutral</li>
+        <li>🫧 Bubble Pop — sad · lonely</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="text-xs text-[var(--muted)] mt-12">© Mini Ira · Product case study prepared by Product Manager · Generated 2026</p>
+</section>
+
+</body>
+</html>

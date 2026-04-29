@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CareerMap AI — Product Case Study</title>
+<meta name="description" content="CareerMap AI: a decision-support platform that turns career confusion into a clear, personalized path. Product Manager case study." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAFAFB; --card:#FFFFFF; --border:#E5E7EB; --border-soft:#EEF0F4;
+    --ink:#0F172A; --text:#1F2937; --muted:#6B7280;
+    --primary:#6366F1; --violet:#8B5CF6; --mint:#10B981; --amber:#F59E0B; --rose:#F43F5E;
+    --tbl-head:#EEF2FF; --zebra:#F9FAFB;
+    --radius:16px; --shadow:0 1px 2px rgba(15,23,42,.04), 0 8px 24px rgba(15,23,42,.04);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6}
+  a{color:var(--primary);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .accent-bar{height:4px;background:linear-gradient(90deg,var(--primary),var(--violet),var(--mint));position:sticky;top:0;z-index:50}
+  nav.top{position:sticky;top:4px;z-index:40;backdrop-filter:saturate(140%) blur(10px);background:rgba(250,250,251,.85);border-bottom:1px solid var(--border-soft)}
+  .nav-inner{max-width:1080px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--ink)}
+  .brand .dot{width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,var(--primary),var(--violet))}
+  .nav-links{display:flex;gap:20px;font-size:14px;color:var(--muted);flex-wrap:wrap}
+  .nav-links a{color:var(--muted)}
+  .nav-links a:hover{color:var(--ink);text-decoration:none}
+  main{max-width:1080px;margin:0 auto;padding:48px 24px 96px}
+  .eyebrow{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--primary)}
+  h1.hero{font-family:'Space Grotesk',sans-serif;font-size:clamp(40px,6vw,68px);line-height:1.05;letter-spacing:-.02em;color:var(--ink);margin:14px 0 18px;font-weight:700}
+  .lede{font-size:clamp(17px,1.6vw,20px);color:var(--muted);max-width:720px}
+  .hero-meta{margin-top:36px;display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+  @media(min-width:780px){.hero-meta{grid-template-columns:1.2fr 1fr}}
+  .kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(min-width:560px){.kpis{grid-template-columns:repeat(4,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;text-align:center;box-shadow:var(--shadow)}
+  .kpi .num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;color:var(--primary);line-height:1}
+  .kpi .lbl{font-size:12px;color:var(--muted);margin-top:6px}
+  .meta-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+  .meta-row{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px dashed var(--border-soft);font-size:14px}
+  .meta-row:last-child{border-bottom:0}
+  .meta-row .k{color:var(--muted)}
+  .meta-row .v{color:var(--ink);font-weight:600;text-align:right}
+  .pull{margin:42px 0 0;padding:22px 26px;border-left:3px solid var(--primary);background:#fff;border-radius:0 12px 12px 0;font-style:italic;color:var(--ink);box-shadow:var(--shadow)}
+  section{margin-top:72px;scroll-margin-top:90px}
+  section .num-eyebrow{display:inline-flex;align-items:center;gap:10px}
+  section .num-eyebrow .n{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:8px;background:var(--tbl-head);color:var(--primary);font-weight:700;font-size:12px}
+  section h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,3.2vw,40px);line-height:1.15;letter-spacing:-.01em;color:var(--ink);margin:14px 0 8px;font-weight:700}
+  section .subhead{color:var(--muted);font-size:17px;max-width:760px;margin:0 0 28px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+  .grid-2{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:780px){.grid-2{grid-template-columns:1fr 1fr}}
+  .grid-3{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:780px){.grid-3{grid-template-columns:repeat(3,1fr)}}
+  .grid-4{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(min-width:780px){.grid-4{grid-template-columns:repeat(4,1fr)}}
+  .quote{background:#fff;border:1px solid var(--border);border-left:3px solid var(--violet);border-radius:12px;padding:16px 18px;color:var(--ink);box-shadow:var(--shadow)}
+  .quote .who{display:block;color:var(--muted);font-size:13px;margin-top:8px;font-style:normal}
+  table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;font-size:14px;box-shadow:var(--shadow)}
+  th,td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border-soft)}
+  th{background:var(--tbl-head);color:var(--ink);font-weight:700;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+  tbody tr:nth-child(even) td{background:var(--zebra)}
+  tbody tr:last-child td{border-bottom:0}
+  .persona h3{margin:0 0 4px;color:var(--ink);font-size:16px}
+  .persona .role{color:var(--muted);font-size:13px;margin-bottom:10px}
+  .persona .jtbd{font-size:13px;background:var(--tbl-head);color:var(--ink);padding:8px 10px;border-radius:8px;margin-top:10px}
+  .step{display:flex;gap:14px;padding:16px 0;border-bottom:1px dashed var(--border-soft)}
+  .step:last-child{border-bottom:0}
+  .step .step-n{flex:0 0 36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--violet));color:#fff;display:grid;place-items:center;font-weight:700}
+  .step h3{margin:0 0 4px;color:var(--ink);font-size:15px}
+  .step p{margin:0;color:var(--muted);font-size:14px}
+  .formula{background:linear-gradient(135deg,#EEF2FF,#F5F3FF);border:1px solid #E0E7FF;border-radius:14px;padding:22px;margin:8px 0 20px}
+  .formula .label{font-size:12px;color:var(--primary);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+  .formula code{font-family:'JetBrains Mono','Space Grotesk',ui-monospace,monospace;font-size:16px;color:var(--ink);background:transparent}
+  ul.clean{list-style:none;padding:0;margin:0}
+  ul.clean li{padding:10px 0 10px 26px;position:relative;border-bottom:1px dashed var(--border-soft);color:var(--text);font-size:14.5px}
+  ul.clean li:last-child{border-bottom:0}
+  ul.clean li::before{content:"";position:absolute;left:6px;top:18px;width:8px;height:8px;border-radius:50%;background:var(--primary)}
+  .tradeoff h3{margin:0 0 6px;color:var(--ink);font-size:16px}
+  .tradeoff .row{font-size:14px;margin:6px 0}
+  .tradeoff .row b{color:var(--ink)}
+  .validation-stat{text-align:center;padding:24px}
+  .validation-stat .big{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:44px;line-height:1;color:var(--primary)}
+  .validation-stat .lbl{color:var(--muted);font-size:13px;margin-top:10px}
+  .reflection .card{padding:24px}
+  .reflection h3{margin:0 0 6px;color:var(--ink);font-size:17px;font-family:'Space Grotesk',sans-serif}
+  .reflection p{margin:0;color:var(--text);font-size:14.5px}
+  .cta{margin-top:80px;text-align:center;padding:56px 24px;background:linear-gradient(135deg,#fff,#F5F3FF);border:1px solid var(--border);border-radius:24px;box-shadow:var(--shadow)}
+  .cta h2{font-family:'Space Grotesk',sans-serif;color:var(--ink);font-size:32px;margin:0 0 10px}
+  .cta p{color:var(--muted);margin:0 0 22px}
+  .btn{display:inline-block;padding:12px 22px;border-radius:10px;background:var(--ink);color:#fff;font-weight:600;font-size:14px}
+  .btn.primary{background:linear-gradient(135deg,var(--primary),var(--violet))}
+  .btn + .btn{margin-left:10px}
+  footer{max-width:1080px;margin:24px auto 48px;padding:24px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  .tag{display:inline-block;padding:3px 10px;border-radius:999px;background:var(--tbl-head);color:var(--primary);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="accent-bar"></div>
+<nav class="top">
+  <div class="nav-inner">
+    <div class="brand"><span class="dot"></span> CareerMap AI · Case Study</div>
+    <div class="nav-links">
+      <a href="#problem">Problem</a><a href="#users">Users</a><a href="#solution">Solution</a>
+      <a href="#engine">Engine</a><a href="#architecture">Trade-offs</a><a href="#flows">Flows</a>
+      <a href="#validation">Validation</a><a href="#roadmap">Roadmap</a><a href="#reflection">Reflection</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <header>
+    <span class="tag">Product Case Study · 2026</span>
+    <h1 class="hero">CareerMap AI</h1>
+    <p class="lede">A decision-support platform that turns career confusion into a clear, personalized path.</p>
+
+    <div class="kpis" style="margin-top:32px">
+      <div class="kpi"><div class="num">3 sec</div><div class="lbl">to first insight</div></div>
+      <div class="kpi"><div class="num">7</div><div class="lbl">career clusters</div></div>
+      <div class="kpi"><div class="num">+155%</div><div class="lbl">user clarity lift</div></div>
+      <div class="kpi"><div class="num">0</div><div class="lbl">hallucinations</div></div>
+    </div>
+
+    <div class="hero-meta">
+      <div class="meta-card">
+        <div class="meta-row"><span class="k">Role</span><span class="v">Product Manager (end-to-end ownership)</span></div>
+        <div class="meta-row"><span class="k">Timeline</span><span class="v">6 weeks · Discovery → MVP → Validation</span></div>
+        <div class="meta-row"><span class="k">Team</span><span class="v">1 PM · 1 Designer · 2 Engineers</span></div>
+        <div class="meta-row"><span class="k">Surface</span><span class="v">Web app · React + TypeScript</span></div>
+        <div class="meta-row"><span class="k">Status</span><span class="v">Live MVP · Validating with early users</span></div>
+      </div>
+      <div class="pull" style="margin-top:0">
+        “Most resume tools give you a score. <b>CareerMap gives you a decision.</b>”
+      </div>
+    </div>
+  </header>
+
+  <section id="problem">
+    <div class="num-eyebrow"><span class="n">01</span><span class="eyebrow">Problem</span></div>
+    <h2>Students don't lack tools — they lack clarity.</h2>
+    <p class="subhead">We talked to 23 final-year students and early-career switchers. The pattern was sharper than expected: they were drowning in resume scanners, course platforms, and LinkedIn advice — yet none of these tools answered the one question that actually mattered: <b>“What should I do next?”</b></p>
+
+    <h3 style="font-family:'Space Grotesk';color:var(--ink);margin:8px 0 12px">What users actually said</h3>
+    <div class="grid-3">
+      <div class="quote">“My resume score is 78. Cool. Now what?”<span class="who">— B.Tech, 4th year</span></div>
+      <div class="quote">“I have 40 skills listed. I don't know which 5 actually matter for a Product role.”<span class="who">— Career switcher, marketing → PM</span></div>
+      <div class="quote">“Every course platform tells me to learn everything. I have 3 months.”<span class="who">— M.Sc graduate</span></div>
+    </div>
+
+    <h3 style="font-family:'Space Grotesk';color:var(--ink);margin:32px 0 12px">The transparency gap</h3>
+    <table>
+      <thead><tr><th>Existing tools</th><th>What's missing</th><th>User cost</th></tr></thead>
+      <tbody>
+        <tr><td>Resume scanners</td><td>Why this score?</td><td>No trust</td></tr>
+        <tr><td>Job boards</td><td>Am I ready?</td><td>Wasted applications</td></tr>
+        <tr><td>Course platforms</td><td>Which skill first?</td><td>3-month detours</td></tr>
+        <tr><td>LinkedIn advice</td><td>Personalised to me?</td><td>Generic noise</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="users">
+    <div class="num-eyebrow"><span class="n">02</span><span class="eyebrow">Users & Goals</span></div>
+    <h2>Who we're building for.</h2>
+    <div class="grid-3">
+      <div class="card persona">
+        <h3>Aspiring Aman</h3>
+        <div class="role">Final-year engineering student</div>
+        <p>Knows he wants 'tech' but not which role. Has projects, no clear narrative.</p>
+        <div class="jtbd"><b>JTBD:</b> “Tell me which role I'm closest to — and the 3 things to fix this month.”</div>
+      </div>
+      <div class="card persona">
+        <h3>Switching Sara</h3>
+        <div class="role">2 yrs marketing → wants Product</div>
+        <p>Has transferable skills but no PM signal on her resume.</p>
+        <div class="jtbd"><b>JTBD:</b> “Show me the realistic path, not the dream path.”</div>
+      </div>
+      <div class="card persona">
+        <h3>Returning Riya</h3>
+        <div class="role">Career break, re-entering tech</div>
+        <p>Confident in fundamentals, anxious about 'gap' perception.</p>
+        <div class="jtbd"><b>JTBD:</b> “Help me prove I'm still ready — fast.”</div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Space Grotesk';color:var(--ink);margin:32px 0 12px">Goals & success metrics</h3>
+    <table>
+      <thead><tr><th>Goal</th><th>Metric</th><th>Target</th></tr></thead>
+      <tbody>
+        <tr><td>Reduce career confusion</td><td>% users selecting a target role within 1 session</td><td>≥ 70%</td></tr>
+        <tr><td>Replace generic scores</td><td>% users who can explain their score back</td><td>≥ 80%</td></tr>
+        <tr><td>Drive concrete next action</td><td>Roadmap tasks started within 7 days</td><td>≥ 3 tasks/user</td></tr>
+        <tr><td>Build trust</td><td>Self-reported clarity (1–5)</td><td>≥ 4.2</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="solution">
+    <div class="num-eyebrow"><span class="n">03</span><span class="eyebrow">Solution</span></div>
+    <h2>From score to decision.</h2>
+    <p class="subhead">CareerMap AI is structured around one principle: <b>every screen must reduce a decision, not just display data.</b> The product flows in four deliberate steps — Upload, Map, Compare, Act.</p>
+    <div class="card">
+      <div class="step"><div class="step-n">1</div><div><h3>Upload</h3><p>Resume in. Skills, projects, experience parsed.</p></div></div>
+      <div class="step"><div class="step-n">2</div><div><h3>Map</h3><p>Pick from 7 career clusters → role-specific scoring.</p></div></div>
+      <div class="step"><div class="step-n">3</div><div><h3>Compare</h3><p>Side-by-side roles. Reality-check vs aspiration.</p></div></div>
+      <div class="step"><div class="step-n">4</div><div><h3>Act</h3><p>Personalised roadmap with 30/60/90-day tasks.</p></div></div>
+    </div>
+
+    <h3 style="font-family:'Space Grotesk';color:var(--ink);margin:32px 0 12px">Design principles</h3>
+    <ul class="clean">
+      <li><b>Show the math.</b> Every score breaks down into Skills (40%) · Projects (30%) · Experience (30%).</li>
+      <li><b>One decision per screen.</b> No dashboards-of-everything.</li>
+      <li><b>Deterministic &gt; clever.</b> Rules-based engine first, LLM only where it can't hallucinate.</li>
+      <li><b>Aspiration meets reality.</b> Always pair the 'dream role' with a 'best-fit role'.</li>
+    </ul>
+  </section>
+
+  <section id="engine">
+    <div class="num-eyebrow"><span class="n">04</span><span class="eyebrow">The Scoring Engine</span></div>
+    <h2>Transparent by design.</h2>
+    <p class="subhead">We rejected the 'magic black-box score' pattern. The Readiness Score is a weighted composite users can mentally reproduce.</p>
+
+    <div class="formula">
+      <div class="label">Readiness Score formula</div>
+      <code>Score = (Skills match × 0.40) + (Projects relevance × 0.30) + (Experience fit × 0.30)</code>
+      <p style="margin:10px 0 0;color:var(--muted);font-size:13px">Each sub-score is 0–100 and visible to the user with the exact contributing items.</p>
+    </div>
+
+    <h3 style="font-family:'Space Grotesk';color:var(--ink);margin:8px 0 12px">Weight rationale</h3>
+    <table>
+      <thead><tr><th>Component</th><th>Weight</th><th>Why this weight</th></tr></thead>
+      <tbody>
+        <tr><td>Skills match</td><td>40%</td><td>Strongest predictor of role-fit per user interviews + recruiter signal.</td></tr>
+        <tr><td>Projects relevance</td><td>30%</td><td>Proves applied ability; differentiates similar resumes.</td></tr>
+        <tr><td>Experience fit</td><td>30%</td><td>Captures domain context — but capped to avoid penalising switchers.</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-family:'Space Grotesk';color:var(--ink);margin:32px 0 12px">Edge cases we explicitly handled</h3>
+    <ul class="clean">
+      <li><b>Empty resume:</b> Show diagnostic flow instead of a 0/100 that demoralises.</li>
+      <li><b>Over-qualified:</b> Cap experience contribution; surface 'consider senior roles' nudge.</li>
+      <li><b>Skill spam (40+ listed):</b> Weight only skills with project evidence.</li>
+      <li><b>Career switchers:</b> Re-weight transferable skills using cross-cluster mapping.</li>
+    </ul>
+  </section>
+
+  <section id="architecture">
+    <div class="num-eyebrow"><span class="n">05</span><span class="eyebrow">Architecture & PM Trade-offs</span></div>
+    <h2>Choosing boring tech on purpose.</h2>
+    <div class="grid-2">
+      <div class="card tradeoff">
+        <h3>Rules-based Advisor (vs LLM)</h3>
+        <p class="row"><b>Decision:</b> Picked deterministic recommendations over LLM generation.</p>
+        <p class="row"><b>Impact:</b> Zero hallucinations. Users trust the 'why' explanation. LLM reserved for v2 conversational layer.</p>
+      </div>
+      <div class="card tradeoff">
+        <h3>Curated role taxonomy (vs scraping live job posts)</h3>
+        <p class="row"><b>Decision:</b> Hand-built 7 clusters × ~6 roles with explicit skill weights.</p>
+        <p class="row"><b>Impact:</b> Slower to expand, but every recommendation is explainable. Live API in v2.</p>
+      </div>
+      <div class="card tradeoff">
+        <h3>Client-side scoring (vs backend)</h3>
+        <p class="row"><b>Decision:</b> All scoring runs in the browser on parsed JSON.</p>
+        <p class="row"><b>Impact:</b> Instant feedback, zero infra cost for MVP. Privacy bonus: resume never leaves device.</p>
+      </div>
+      <div class="card tradeoff">
+        <h3>Compare 2 roles only (vs N)</h3>
+        <p class="row"><b>Decision:</b> Forced binary comparison.</p>
+        <p class="row"><b>Impact:</b> Reduces analysis paralysis — the #1 problem from user research.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="flows">
+    <div class="num-eyebrow"><span class="n">06</span><span class="eyebrow">Key Flows</span></div>
+    <h2>Four screens, one decision each.</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="margin:0 0 6px;color:var(--ink);font-family:'Space Grotesk'">Upload → Parse</h3>
+        <p style="margin:0;color:var(--text);font-size:14.5px">Drag-drop resume. Parser extracts skills, projects, experience. User confirms in 5 seconds.</p>
+        <p style="margin:10px 0 0;color:var(--primary);font-size:13px;font-weight:600">Decision: Is my data correct?</p>
+      </div>
+      <div class="card">
+        <h3 style="margin:0 0 6px;color:var(--ink);font-family:'Space Grotesk'">Select Role → Cluster Picker</h3>
+        <p style="margin:0;color:var(--text);font-size:14.5px">7 clusters as cards. Each cluster expands to roles with skill-weight previews.</p>
+        <p style="margin:10px 0 0;color:var(--primary);font-size:13px;font-weight:600">Decision: Which role do I want to target?</p>
+      </div>
+      <div class="card">
+        <h3 style="margin:0 0 6px;color:var(--ink);font-family:'Space Grotesk'">Dashboard → Readiness Breakdown</h3>
+        <p style="margin:0;color:var(--text);font-size:14.5px">Circular score + 3 sub-scores + 'why this score' panel + closest matching role.</p>
+        <p style="margin:10px 0 0;color:var(--primary);font-size:13px;font-weight:600">Decision: How ready am I, really?</p>
+      </div>
+      <div class="card">
+        <h3 style="margin:0 0 6px;color:var(--ink);font-family:'Space Grotesk'">Advisor → Compare & Roadmap</h3>
+        <p style="margin:0;color:var(--text);font-size:14.5px">Side-by-side: Aspiration role vs Best-fit role. 30/60/90-day roadmap auto-generated.</p>
+        <p style="margin:10px 0 0;color:var(--primary);font-size:13px;font-weight:600">Decision: What do I do this week?</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="validation">
+    <div class="num-eyebrow"><span class="n">07</span><span class="eyebrow">Validation</span></div>
+    <h2>Did it actually move the needle?</h2>
+    <p class="subhead">We ran 14 moderated tests after MVP launch. Same 3 tasks, before-and-after CareerMap, self-reported clarity on a 1–5 scale.</p>
+
+    <div class="grid-3">
+      <div class="card validation-stat"><div class="big">1.8 → 4.6</div><div class="lbl">Clarity score (1–5)</div></div>
+      <div class="card validation-stat"><div class="big">+155%</div><div class="lbl">Lift in 'I know my next step'</div></div>
+      <div class="card validation-stat"><div class="big">11/14</div><div class="lbl">Selected a target role in 1 session</div></div>
+    </div>
+
+    <h3 style="font-family:'Space Grotesk';color:var(--ink);margin:32px 0 12px">North-star & guardrails</h3>
+    <table>
+      <thead><tr><th>Type</th><th>Metric</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>North star</td><td>Roadmap tasks completed in first 14 days</td><td>Proxy for real-world action, not vanity engagement.</td></tr>
+        <tr><td>Input</td><td>% users completing role selection</td><td>Funnel health.</td></tr>
+        <tr><td>Quality</td><td>Self-reported clarity (post-session)</td><td>We optimise for confidence, not time-on-page.</td></tr>
+        <tr><td>Guardrail</td><td>% users who skip score explanation</td><td>If high → we lost transparency. Currently 8%.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="quote" style="margin-top:24px">“This is the first time a tool actually told me what to do, not just what I lack.”<span class="who">— User #9, post-test interview</span></div>
+  </section>
+
+  <section id="roadmap">
+    <div class="num-eyebrow"><span class="n">08</span><span class="eyebrow">Roadmap</span></div>
+    <h2>Where v2 goes.</h2>
+    <table>
+      <thead><tr><th>Horizon</th><th>Initiative</th><th>Why now</th></tr></thead>
+      <tbody>
+        <tr><td>Now (Q1)</td><td>Real-time NLP resume parsing</td><td>Cut confirmation step; reduce parse errors below 3%.</td></tr>
+        <tr><td>Next (Q2)</td><td>Live job-board API (LinkedIn / Naukri)</td><td>Convert readiness into actual applications.</td></tr>
+        <tr><td>Next (Q2)</td><td>Peer benchmarking ('users like you')</td><td>Social proof drives roadmap adherence.</td></tr>
+        <tr><td>Later (Q3)</td><td>Conversational Advisor (LLM, grounded)</td><td>Once rules cover 80% — LLM only fills gaps.</td></tr>
+        <tr><td>Later (Q3)</td><td>Recruiter-side preview ('resume X-ray')</td><td>Two-sided validation; new growth surface.</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-family:'Space Grotesk';color:var(--ink);margin:32px 0 12px">What I'd do differently</h3>
+    <ul class="clean">
+      <li>Run the cluster taxonomy past 3 recruiters before building UI — would've saved 1 week.</li>
+      <li>Ship the Compare flow in week 2, not week 5 — it became the most-loved feature.</li>
+      <li>Instrument 'explain the score back to me' as a true funnel step, not a survey question.</li>
+    </ul>
+  </section>
+
+  <section id="reflection" class="reflection">
+    <div class="num-eyebrow"><span class="n">09</span><span class="eyebrow">Reflection</span></div>
+    <h2>What this project taught me as a PM.</h2>
+    <div class="grid-2">
+      <div class="card"><h3>Transparency is a feature, not a footnote.</h3><p>The single highest-impact decision was making the scoring formula visible. Every other piece of trust hung off it.</p></div>
+      <div class="card"><h3>Decision-support beats data-display.</h3><p>Users don't want more charts. They want fewer, sharper choices. We removed 4 dashboard widgets and clarity went up.</p></div>
+      <div class="card"><h3>Pick the boring tech that lets you sleep.</h3><p>Deterministic rules over LLMs for v1 meant zero late-night hallucination bug reports — and a product I could actually defend in user interviews.</p></div>
+      <div class="card"><h3>Edge cases are the product.</h3><p>Empty resumes, switchers, returners — handling these well is what separated us from 'just another scanner.'</p></div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Thank you for reading.</h2>
+    <p>CareerMap AI · Built with intent, shipped with evidence.</p>
+    <a class="btn primary" href="https://mapcareerai.lovable.app" target="_blank" rel="noopener">View Live Product</a>
+  </section>
+</main>
+
+<footer>
+  <div>© 2026 CareerMap AI · Product Case Study</div>
+  <div>Made by the PM · Long-form web edition</div>
+</footer>
+</body>
+</html>

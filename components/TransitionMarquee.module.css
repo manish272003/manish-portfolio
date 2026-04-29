@@ -1,0 +1,53 @@
+.marqueeContainer {
+  width: 100%;
+  overflow: hidden;
+  background-color: transparent;
+  padding: 1rem 0 3rem 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.marqueeInner {
+  display: flex;
+  min-width: 200%;
+  animation: scroll-horizontal 15s linear infinite;
+  will-change: transform;
+}
+
+.marqueeContent {
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding-right: 4rem;
+}
+
+.marqueeText {
+  font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.star {
+  font-size: 1.5rem;
+  color: #5ce1e6;
+}
+
+@keyframes scroll-horizontal {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 768px) {
+  .marqueeText {
+    font-size: 2rem;
+  }
+  .star {
+    font-size: 1rem;
+  }
+}

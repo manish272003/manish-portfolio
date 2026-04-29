@@ -1,0 +1,80 @@
+{
+  "app/page.tsx -> @/components/Experience": {
+    "id": 5653,
+    "files": [
+      "static/chunks/ee560e2c.51563ac2dab2939d.js",
+      "static/chunks/c15bf2b0.fbb9002d519b99fe.js",
+      "static/chunks/145.458ee4ce147e1c65.js",
+      "static/chunks/845.6f48b314ca25e0c5.js",
+      "static/chunks/183.c34ce5f7e4702e09.js"
+    ]
+  },
+  "app/page.tsx -> @/components/band/App": {
+    "id": 1340,
+    "files": [
+      "static/chunks/b536a0f1.b8c7485058b305ee.js",
+      "static/chunks/080de1a6.f4f42c341431e766.js",
+      "static/chunks/551.65fea24605bf0cf6.js",
+      "static/chunks/340.67c8b289eeea4e3d.js"
+    ]
+  },
+  "app/page.tsx -> @/components/card/CardSection": {
+    "id": 2503,
+    "files": [
+      "static/css/836c8aaa1a555113.css",
+      "static/chunks/c15bf2b0.fbb9002d519b99fe.js",
+      "static/chunks/145.458ee4ce147e1c65.js",
+      "static/chunks/845.6f48b314ca25e0c5.js",
+      "static/chunks/503.27973ad00acf47b1.js"
+    ]
+  },
+  "app/page.tsx -> @/components/footer": {
+    "id": 3284,
+    "files": [
+      "static/chunks/ee560e2c.51563ac2dab2939d.js",
+      "static/chunks/827.6a69fc57bae3afa0.js"
+    ]
+  },
+  "app/page.tsx -> @/components/grid": {
+    "id": 9463,
+    "files": [
+      "static/chunks/9c4e2130.a3102ca36d8a5772.js",
+      "static/chunks/dc112a36.16a8c6a6b6181c35.js",
+      "static/chunks/972-1ee9cb783e3a285b.js",
+      "static/chunks/145.458ee4ce147e1c65.js",
+      "static/chunks/958.0fecd1466eea57ac.js",
+      "static/chunks/526.bf26cd31dc8d3b67.js",
+      "static/chunks/575.d3567e8e59df4c72.js"
+    ]
+  },
+  "app/page.tsx -> @/components/recent-projects": {
+    "id": 7758,
+    "files": [
+      "static/chunks/ee560e2c.51563ac2dab2939d.js",
+      "static/chunks/972-1ee9cb783e3a285b.js",
+      "static/chunks/145.458ee4ce147e1c65.js",
+      "static/chunks/958.0fecd1466eea57ac.js",
+      "static/chunks/32.6a265ad88a7de8aa.js"
+    ]
+  },
+  "app/page.tsx -> @/components/ui/floating-nav": {
+    "id": 1893,
+    "files": [
+      "static/chunks/972-1ee9cb783e3a285b.js",
+      "static/chunks/958.0fecd1466eea57ac.js",
+      "static/chunks/893.37618e6ad72136a2.js"
+    ]
+  },
+  "node_modules/@react-three/drei/core/VideoTexture.js -> hls.js": {
+    "id": null,
+    "files": []
+  },
+  "node_modules/@react-three/drei/web/FaceLandmarker.js -> @mediapipe/tasks-vision": {
+    "id": null,
+    "files": []
+  },
+  "node_modules/@react-three/rapier/dist/react-three-rapier.esm.js -> @dimforge/rapier3d-compat": {
+    "id": 9285,
+    "files": []
+  }
+}

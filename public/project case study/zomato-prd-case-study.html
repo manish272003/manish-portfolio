@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PRD: Increasing Text Reviews on Zomato — Manish Sunkishala</title>
+<meta name="description" content="A product requirements document case study on increasing text reviews for Zomato — by Manish Sunkishala." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#E23744;
+    --red-dark:#b81e2b;
+    --red-soft:#fdecee;
+    --ink:#1c1c1c;
+    --muted:#5b5b5b;
+    --line:#ececec;
+    --bg:#ffffff;
+    --bg-soft:#fafafa;
+    --max:1180px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.65;font-size:17px;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--red);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* Top bar */
+  .topbar{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);
+    backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--line);
+  }
+  .topbar-inner{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .back{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-weight:500;font-size:14px}
+  .back:hover{color:var(--red);text-decoration:none}
+  .back svg{width:16px;height:16px}
+  .brand{font-weight:700;letter-spacing:.02em;font-size:14px;color:var(--muted)}
+  .brand b{color:var(--red)}
+
+  /* Hero */
+  .hero{background:linear-gradient(180deg,#fff 0%,var(--red-soft) 100%);border-bottom:1px solid var(--line)}
+  .hero-inner{max-width:var(--max);margin:0 auto;padding:72px 24px 64px}
+  .eyebrow{display:inline-block;background:var(--red);color:#fff;font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border-radius:999px}
+  h1.title{font-family:'Fraunces',Georgia,serif;font-weight:800;font-size:clamp(36px,5.5vw,60px);line-height:1.05;margin:18px 0 14px;letter-spacing:-.02em}
+  .subtitle{font-size:19px;color:var(--muted);max-width:720px}
+  .meta{display:flex;flex-wrap:wrap;gap:28px;margin-top:32px;padding-top:24px;border-top:1px solid rgba(0,0,0,.08)}
+  .meta div{font-size:13px}
+  .meta span{display:block;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-size:11px;margin-bottom:4px;font-weight:600}
+  .meta strong{font-size:15px;font-weight:600}
+
+  /* Layout w/ sidebar */
+  .layout{max-width:var(--max);margin:0 auto;padding:56px 24px 96px;display:grid;grid-template-columns:220px 1fr;gap:56px}
+  @media (max-width:900px){.layout{grid-template-columns:1fr;gap:24px;padding-top:32px}}
+
+  /* TOC */
+  .toc{position:sticky;top:80px;align-self:start;font-size:14px;max-height:calc(100vh - 100px);overflow-y:auto}
+  .toc h4{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 12px;font-weight:700}
+  .toc ol{list-style:none;padding:0;margin:0;counter-reset:t}
+  .toc li{counter-increment:t;margin:0}
+  .toc a{display:block;padding:7px 0 7px 28px;color:var(--muted);border-left:2px solid var(--line);position:relative;transition:.2s}
+  .toc a::before{content:counter(t,decimal-leading-zero);position:absolute;left:8px;font-size:11px;font-weight:600;color:var(--muted);top:8px}
+  .toc a:hover,.toc a.active{color:var(--red);border-left-color:var(--red);text-decoration:none;background:var(--red-soft)}
+  .toc a:hover::before,.toc a.active::before{color:var(--red)}
+  @media (max-width:900px){.toc{position:static;max-height:none;border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--bg-soft)}}
+
+  /* Content */
+  article section{padding:8px 0 40px;scroll-margin-top:80px}
+  article section + section{border-top:1px solid var(--line);padding-top:40px}
+  article h2{font-family:'Fraunces',Georgia,serif;font-size:34px;font-weight:700;letter-spacing:-.01em;margin:0 0 8px;line-height:1.15}
+  article h2 .num{color:var(--red);font-weight:600;margin-right:12px;font-size:.7em;vertical-align:.15em}
+  article h3{font-size:18px;font-weight:700;margin:28px 0 10px;letter-spacing:-.005em}
+  article h4{font-size:14px;font-weight:700;margin:20px 0 6px;text-transform:uppercase;letter-spacing:.08em;color:var(--red)}
+  article p{margin:0 0 14px;color:#2a2a2a}
+  article ul{padding-left:20px;margin:0 0 16px}
+  article li{margin:6px 0}
+  article strong{color:var(--ink)}
+  mark{background:var(--red);color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+
+  .lede{font-size:19px;color:#333}
+  .callout{background:var(--red-soft);border-left:3px solid var(--red);padding:18px 22px;border-radius:0 10px 10px 0;margin:18px 0;font-size:15px}
+  .callout b{color:var(--red-dark)}
+
+  /* Goal/persona/etc card grids */
+  .grid{display:grid;gap:14px;margin:14px 0 4px}
+  .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+  .grid.cols-4{grid-template-columns:repeat(4,1fr)}
+  @media (max-width:760px){.grid.cols-2,.grid.cols-4{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:12px;padding:18px;background:#fff;transition:.2s}
+  .card:hover{border-color:var(--red);box-shadow:0 6px 24px -12px rgba(226,55,68,.4)}
+  .card .k{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:6px}
+  .card .v{font-size:15px;font-weight:500}
+
+  /* Bar charts */
+  .chart{margin:18px 0 24px;border:1px solid var(--line);border-radius:12px;padding:22px;background:var(--bg-soft)}
+  .chart h5{margin:0 0 14px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+  .bar{display:grid;grid-template-columns:160px 1fr 40px;gap:12px;align-items:center;margin:8px 0;font-size:14px}
+  .bar .track{height:18px;background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .bar .fill{height:100%;background:linear-gradient(90deg,var(--red) 0%,#ff5e6c 100%);border-radius:5px}
+  .bar .val{font-weight:700;color:var(--red);text-align:right;font-variant-numeric:tabular-nums}
+
+  /* Persona */
+  .persona{display:grid;grid-template-columns:120px 1fr;gap:22px;align-items:start;border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--bg-soft);margin:14px 0}
+  .avatar{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#ffb3ba,#ff7986);display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:800;color:#fff;font-family:'Fraunces',serif}
+  .persona h3{margin:0 0 2px}
+  .persona .role{color:var(--muted);font-size:14px;margin-bottom:14px}
+  @media (max-width:600px){.persona{grid-template-columns:1fr;text-align:center}.avatar{margin:0 auto}}
+
+  /* Tables */
+  .tbl-wrap{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:12px}
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:640px}
+  th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--red);color:#fff;font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;border-bottom:none}
+  tr:last-child td{border-bottom:none}
+  tr:nth-child(even) td{background:var(--bg-soft)}
+  td b{color:var(--red-dark)}
+
+  /* Solutions */
+  .sol{display:grid;grid-template-columns:42px 1fr;gap:16px;padding:18px;border:1px solid var(--line);border-radius:12px;margin:12px 0;background:#fff}
+  .sol .n{width:42px;height:42px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-family:'Fraunces',serif;font-size:18px}
+  .sol h4{margin:2px 0 6px;text-transform:none;letter-spacing:0;color:var(--ink);font-size:16px}
+  .sol p{margin:0;font-size:14px;color:var(--muted)}
+  .sol .tag{display:inline-block;background:var(--red);color:#fff;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:4px;margin-left:8px;vertical-align:2px}
+
+  /* Phases timeline */
+  .phases{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}
+  @media (max-width:760px){.phases{grid-template-columns:1fr 1fr}}
+  .phase{border:1px solid var(--line);border-top:3px solid var(--red);border-radius:10px;padding:16px;background:#fff}
+  .phase h5{margin:0 0 8px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--red)}
+  .phase p{font-size:13px;margin:0;color:var(--muted)}
+
+  /* Footer */
+  footer{border-top:1px solid var(--line);background:var(--bg-soft);padding:40px 24px;text-align:center;color:var(--muted);font-size:14px}
+  footer .dot{color:var(--red);margin:0 8px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner" style="justify-content:flex-end">
+    <div class="brand">Manish Sunkishala <b>·</b> Case Study</div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Product Requirements Document</span>
+    <h1 class="title">Increasing Text Reviews on Zomato</h1>
+    <p class="subtitle">Designing a system of nudges, in-app prompts and gamification to convert delivered orders into honest text reviews — without overwhelming the user.</p>
+    <div class="meta">
+      <div><span>Author</span><strong>Manish Sunkishala</strong></div>
+      <div><span>Domain</span><strong>Food-tech · Consumer App</strong></div>
+      <div><span>Focus</span><strong>Engagement &amp; UGC</strong></div>
+      <div><span>Document type</span><strong>Product Requirements Doc</strong></div>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="toc" id="toc">
+    <h4>Contents</h4>
+    <ol>
+      <li><a href="#problem">Problem statement</a></li>
+      <li><a href="#goals">Goals &amp; non-goals</a></li>
+      <li><a href="#validation">Problem validation</a></li>
+      <li><a href="#audience">Target audience</a></li>
+      <li><a href="#journey">User journey</a></li>
+      <li><a href="#solutions">Proposed solutions</a></li>
+      <li><a href="#features">Key features</a></li>
+      <li><a href="#metrics">Success metrics</a></li>
+      <li><a href="#logic">Logical &amp; system design</a></li>
+      <li><a href="#tech">Technical considerations</a></li>
+      <li><a href="#launch">Launch readiness</a></li>
+      <li><a href="#risks">Risks &amp; future iterations</a></li>
+    </ol>
+  </aside>
+
+  <article>
+
+    <section id="problem">
+      <h2><span class="num">01</span>Problem statement</h2>
+      <p class="lede">Customers — typically <strong>office employees in tier 1 cities</strong> with high order frequency — <strong>forget to leave a review</strong> once an order is delivered.</p>
+      <p>Nudging them will raise user-generated content, customer trust and retention, ultimately boosting average orders and revenue. It also helps users make better decisions on future orders, creating a content loop for growth.</p>
+      <div class="callout">Company reports show a <b>decline in the YoY growth rate</b> of average monthly transacting users — a strong signal that engagement, not acquisition, is the lever to pull.</div>
+    </section>
+
+    <section id="goals">
+      <h2><span class="num">02</span>Goals &amp; non-goals</h2>
+      <h3>Goals</h3>
+      <div class="grid cols-2">
+        <div class="card"><div class="k">Goal 01</div><div class="v">Increase % of reviewers <em>(reviewers ÷ total users)</em></div></div>
+        <div class="card"><div class="k">Goal 02</div><div class="v">Increase reviews submitted per reviewer</div></div>
+        <div class="card"><div class="k">Goal 03</div><div class="v">Increase review completion rate (reduce churn on the form)</div></div>
+        <div class="card"><div class="k">Goal 04</div><div class="v">Decrease time between delivery and review submission</div></div>
+      </div>
+      <h3>Non-goals</h3>
+      <ul>
+        <li>Not aimed at increasing the <strong>number of orders</strong> in order to grow reviews.</li>
+        <li>Not committing to improve <strong>quality of reviews</strong> or measure customer satisfaction through them.</li>
+        <li>Limited to <strong>English text reviews</strong> — multilingual support is out of scope.</li>
+      </ul>
+    </section>
+
+    <section id="validation">
+      <h2><span class="num">03</span>Problem validation</h2>
+      <p>A user survey validated the hypothesis: when asked why they don’t review, <strong>55% of respondents cited a lack of prompts</strong>. Behavioural data backed this up — the <strong>app-opening rate falls sharply</strong> once an order is delivered.</p>
+
+      <div class="chart">
+        <h5>Why people don’t review (survey, n = 45)</h5>
+        <div class="bar"><div>Forget to review</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="val">20</div></div>
+        <div class="bar"><div>No rewards</div><div class="track"><div class="fill" style="width:75%"></div></div><div class="val">15</div></div>
+        <div class="bar"><div>Time consuming</div><div class="track"><div class="fill" style="width:25%"></div></div><div class="val">5</div></div>
+        <div class="bar"><div>Not sure</div><div class="track"><div class="fill" style="width:25%"></div></div><div class="val">5</div></div>
+      </div>
+
+      <div class="chart">
+        <h5>App opening rate across the order lifecycle (%)</h5>
+        <div class="bar"><div>Exploring food</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="val">34</div></div>
+        <div class="bar"><div>Placing orders</div><div class="track"><div class="fill" style="width:97%"></div></div><div class="val">33</div></div>
+        <div class="bar"><div>Order prepared</div><div class="track"><div class="fill" style="width:85%"></div></div><div class="val">29</div></div>
+        <div class="bar"><div>Out for delivery</div><div class="track"><div class="fill" style="width:70%"></div></div><div class="val">24</div></div>
+        <div class="bar"><div>Order delivered</div><div class="track"><div class="fill" style="width:18%"></div></div><div class="val">6</div></div>
+      </div>
+    </section>
+
+    <section id="audience">
+      <h2><span class="num">04</span>Target audience</h2>
+      <p>The selected segment is <strong>18–30 year-olds</strong> with a tech-savvy lifestyle, living in <strong>Tier 1 cities</strong> where Zomato sees high home-delivery volumes — individuals with demanding jobs who rarely open the app outside of ordering.</p>
+
+      <div class="persona">
+        <div class="avatar">A</div>
+        <div>
+          <h3>Asha, 21 · Delhi</h3>
+          <div class="role">Senior developer at IBM · 3 orders weekly</div>
+          <h4>Needs &amp; goals</h4>
+          <ul>
+            <li>Contribute to the community through honest reviews</li>
+            <li>Simple, memorable review submission experience</li>
+          </ul>
+          <h4>Pain points</h4>
+          <ul>
+            <li>Lack of nudges and reminders to submit a review</li>
+            <li>Review process not intuitive enough to be remembered</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="journey">
+      <h2><span class="num">05</span>User journey</h2>
+      <p>Mapping reviews against every step of the order lifecycle reveals the most leverage exists <strong>post-delivery</strong>, exactly where the user disengages most.</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Step</th><th>Role of reviews</th><th>Emotion</th><th>Pain point</th></tr></thead>
+          <tbody>
+            <tr><td><b>Explore homepage</b></td><td>In-app pop-up prompting user to review last order</td><td>Curious, hungry</td><td>Overwhelmed by too many restaurants</td></tr>
+            <tr><td><b>Browse menu</b></td><td>Restaurant choice based on ratings &amp; reviews</td><td>Anxious about quality</td><td>Hard to decide on ratings alone</td></tr>
+            <tr><td><b>Add to cart</b></td><td>Items with text reviews are preferred</td><td>Relieved, curious for offers</td><td>Time-consuming to pick the right item</td></tr>
+            <tr><td><b>Checkout</b></td><td>Reviews enable confident, faster checkout</td><td>Cautious about payment</td><td>Unsure of item quality</td></tr>
+            <tr><td><b>Delivery status</b></td><td>Reminder of why reviews matter</td><td>Excited &amp; anxious</td><td>Unaware of impact of reviews</td></tr>
+            <tr><td><b>Collect delivery</b></td><td>Reminded to review the order</td><td>Joyful</td><td>Forgets to review on delivery</td></tr>
+            <tr><td><b>Post delivery</b></td><td>Submit review via order details / reviews page</td><td>Satisfied, ready to share</td><td>Doesn’t reopen the app until next order</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="solutions">
+      <h2><span class="num">06</span>Proposed solutions</h2>
+      <p>In priority order (mind-map &amp; prioritisation matrix in appendix):</p>
+
+      <div class="sol"><div class="n">1</div><div>
+        <h4>Push notifications &amp; email reminders <span class="tag">Top priority</span></h4>
+        <p>Send timely reminders through existing push and email infrastructure within a <strong>24-hour target window</strong> after delivery — leveraging channels users already check.</p>
+      </div></div>
+
+      <div class="sol"><div class="n">2</div><div>
+        <h4>In-app prompts</h4>
+        <p>Whenever the user opens the app, prompt them about reviewing the last order through pop-ups and contextually placed banners.</p>
+      </div></div>
+
+      <div class="sol"><div class="n">3</div><div>
+        <h4>Review prompts in receipts</h4>
+        <p>Add a review CTA inside the invoice and delivery receipt — artefacts users naturally open to verify their order post delivery.</p>
+      </div></div>
+
+      <div class="sol"><div class="n">4</div><div>
+        <h4>Streak points &amp; leaderboard</h4>
+        <p>Gamify reviewing: award points per review, reward streaks and surface a public leaderboard for community-driven engagement.</p>
+      </div></div>
+    </section>
+
+    <section id="features">
+      <h2><span class="num">07</span>Key features</h2>
+      <ul>
+        <li>Reminders via <strong>push notifications and email</strong> after a delay from delivery.</li>
+        <li><strong>In-app prompts</strong> nudge users about pending reviews while they explore the app.</li>
+        <li>Submit reviews directly from <strong>email invoices</strong>, with a deep-link redirect to the review page.</li>
+        <li><strong>Streak score &amp; leaderboard</strong>, with offers for the top reviewers.</li>
+      </ul>
+    </section>
+
+    <section id="metrics">
+      <h2><span class="num">08</span>Success metrics</h2>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Tier</th><th>Metric</th><th>Event</th><th>Direction</th></tr></thead>
+          <tbody>
+            <tr><td><b>North Star</b></td><td>Number of text reviews submitted</td><td>review_submitted</td><td>↑</td></tr>
+            <tr><td><b>L1</b></td><td>User traffic on review submission page</td><td>review_form_opened</td><td>↑</td></tr>
+            <tr><td><b>L2</b></td><td>Click-through rate on review reminders</td><td>reminder_clicked</td><td>↑</td></tr>
+            <tr><td><b>L3</b></td><td>Notifications opt-out rate</td><td>reminders_disabled</td><td>↓</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="logic">
+      <h2><span class="num">09</span>Logical &amp; system design</h2>
+      <h3>Algorithms</h3>
+      <ul>
+        <li><strong>Order completion timer:</strong> when an order is marked delivered, schedule a reminder notification after a set time (e.g. 30 minutes).</li>
+        <li><strong>Notification throttling:</strong> cap how many review requests a user can receive in a window — critical for high-frequency orderers.</li>
+      </ul>
+      <h3>Schema changes</h3>
+      <div class="grid cols-2">
+        <div class="card"><div class="k">Order table</div><div class="v">Column tracking whether a reminder notification was sent.</div></div>
+        <div class="card"><div class="k">Notification table</div><div class="v">Stores sent notifications: timestamp, channel, type.</div></div>
+        <div class="card"><div class="k">User activity table</div><div class="v">Tracks if review prompt was shown and whether the user interacted.</div></div>
+        <div class="card"><div class="k">Reminder scheduler</div><div class="v">Event-trigger system queues post-delivery reminder jobs.</div></div>
+      </div>
+
+      <h3>System design (high level)</h3>
+      <p>Order completion → event-trigger system → reminder scheduler → message queue → workers fan out to <strong>FCM</strong> (Android), <strong>APNs</strong> (iOS), <strong>SMS provider</strong> and <strong>SMTP email</strong>. A notification server reads templates and logs from cache + database; an analytics service tracks click and send status with retry-on-error.</p>
+    </section>
+
+    <section id="tech">
+      <h2><span class="num">10</span>Technical considerations</h2>
+      <div class="grid cols-2">
+        <div class="card"><div class="k">Scalability</div><div class="v">Handle high reminder volumes &amp; user actions during peak hours.</div></div>
+        <div class="card"><div class="k">Fault tolerance</div><div class="v">Retry mechanism for failed sends; graceful failure handling.</div></div>
+        <div class="card"><div class="k">Latency</div><div class="v">Low latency for reminders &amp; user interactions is critical.</div></div>
+        <div class="card"><div class="k">Security &amp; compliance</div><div class="v">Data handled per GDPR &amp; CCPA; transparent opt-in.</div></div>
+      </div>
+      <h3>Challenges</h3>
+      <ul>
+        <li><strong>Notification fatigue:</strong> dynamic scheduling and user-controlled preferences.</li>
+        <li><strong>User privacy:</strong> opt-in mechanisms and transparency around data usage.</li>
+        <li><strong>Personalisation at scale:</strong> templating engines to generate dynamic content efficiently.</li>
+      </ul>
+    </section>
+
+    <section id="launch">
+      <h2><span class="num">11</span>Launch readiness</h2>
+      <h3>Key milestones</h3>
+      <p><strong>Planning &amp; development:</strong> finalize requirements → UI/UX &amp; prototypes → schema &amp; API → UI build.</p>
+      <p><strong>Testing &amp; feedback:</strong> QA → analytics &amp; A/B plan → beta + feedback loop → marketing plan.</p>
+      <p><strong>Launch &amp; maintenance:</strong> final fixes → public launch → post-launch optimisation.</p>
+
+      <h3>Launch phases</h3>
+      <div class="phases">
+        <div class="phase"><h5>Pre-launch</h5><p>Internal &amp; A/B testing, stakeholder alignment, metrics finalised.</p></div>
+        <div class="phase"><h5>Soft launch</h5><p>Demographic / geographic release, gather feedback, monitor performance.</p></div>
+        <div class="phase"><h5>Full launch</h5><p>Global rollout, awareness push and marketing campaigns.</p></div>
+        <div class="phase"><h5>Post launch</h5><p>Monitor key metrics, continue A/B tests, iterate on feedback.</p></div>
+      </div>
+
+      <h3>Product marketing</h3>
+      <div class="grid cols-4">
+        <div class="card"><div class="k">In-app</div><div class="v">Banners, tutorials, one-click review</div></div>
+        <div class="card"><div class="k">Messaging</div><div class="v">Email · Push · SMS / WhatsApp</div></div>
+        <div class="card"><div class="k">Social</div><div class="v">Posts, influencers, store updates</div></div>
+        <div class="card"><div class="k">Stakeholders</div><div class="v">PM · Data · Marketing · Eng · QA · UX</div></div>
+      </div>
+    </section>
+
+    <section id="risks">
+      <h2><span class="num">12</span>Risks &amp; future iterations</h2>
+      <h3>Risks &amp; mitigation</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Risk</th><th>Mitigation</th></tr></thead>
+          <tbody>
+            <tr><td><b>Negative user experience</b></td><td>Optimise timing, user customisation, non-intrusive messaging, delay reminders.</td></tr>
+            <tr><td><b>Low engagement</b></td><td>Personalise reminders, A/B test designs, monitor opt-out rate.</td></tr>
+            <tr><td><b>Brand misalignment</b></td><td>Align tone with brand, gather feedback to adjust.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Future iterations</h3>
+      <div class="grid cols-2">
+        <div class="card"><div class="k">Short term</div><div class="v">Optimise nudge timing &amp; copy; basic personalisation.</div></div>
+        <div class="card"><div class="k">Mid term</div><div class="v">AI-assisted review writing, one-click review templates.</div></div>
+        <div class="card"><div class="k">Long term</div><div class="v">Gamification, social sharing, deeper restaurant collaboration.</div></div>
+        <div class="card"><div class="k">Open questions</div><div class="v">Ideal cadence? Best channels? How to re-engage opt-outs?</div></div>
+      </div>
+
+      <div class="callout" style="margin-top:24px">
+        <b>Trade-off considered.</b> Pushing for immediate reviews may boost short-term volume but feel transactional, eroding long-term loyalty. Frequent reminders also load the back-end at peak.
+      </div>
+    </section>
+
+  </article>
+</div>
+
+<footer>
+  PRD · Increasing Text Reviews on Zomato <span class="dot">•</span> Manish Sunkishala <span class="dot">•</span> Product Case Study
+</footer>
+
+<script>
+  // TOC scroll-spy
+  const links = document.querySelectorAll('#toc a');
+  const sections = [...links].map(a => document.querySelector(a.getAttribute('href')));
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const id = e.target.id;
+        links.forEach(l=>l.classList.toggle('active', l.getAttribute('href') === '#'+id));
+      }
+    });
+  },{rootMargin:'-40% 0px -55% 0px'});
+  sections.forEach(s=>s && io.observe(s));
+</script>
+</body>
+</html>
