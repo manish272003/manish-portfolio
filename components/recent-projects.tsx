@@ -5,13 +5,27 @@ import Link from "next/link";
 import { FaLocationArrow } from "react-icons/fa6";
 import { FiArrowRight, FiChevronLeft, FiChevronRight, FiGlobe } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { projects } from "@/data";
 
 export const RecentProjects = () => {
   const [isHeaderActive, setIsHeaderActive] = useState(false);
   const [activeCarouselIndex, setActiveCarouselIndex] = useState(0);
+  const lastWheelTime = useRef(0);
+
+  const handleWheel = (e: React.WheelEvent) => {
+    const now = Date.now();
+    if (now - lastWheelTime.current < 500) return;
+
+    if (e.deltaX > 20) {
+      setActiveCarouselIndex(prev => Math.min(projects.length - 1, prev + 1));
+      lastWheelTime.current = now;
+    } else if (e.deltaX < -20) {
+      setActiveCarouselIndex(prev => Math.max(0, prev - 1));
+      lastWheelTime.current = now;
+    }
+  };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -52,7 +66,10 @@ export const RecentProjects = () => {
         </div>
       </motion.div>
 
-      <div className="relative w-full h-[550px] md:h-[650px] flex items-center justify-center overflow-visible perspective-[1200px] mt-10">
+      <div 
+        className="relative w-full h-[550px] md:h-[650px] flex items-center justify-center overflow-visible perspective-[1200px] mt-10"
+        onWheel={handleWheel}
+      >
         <AnimatePresence initial={false}>
           {projects.map((item, index) => {
             const offset = index - activeCarouselIndex;
@@ -77,6 +94,16 @@ export const RecentProjects = () => {
                 style={{ pointerEvents: pointerEvents as any }}
                 onClick={() => {
                   if (absOffset !== 0) setActiveCarouselIndex(index);
+                }}
+                drag={absOffset === 0 ? "x" : false}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragEnd={(e, { offset, velocity }) => {
+                  if (offset.x > 50 || velocity.x > 500) {
+                    setActiveCarouselIndex(prev => Math.max(0, prev - 1));
+                  } else if (offset.x < -50 || velocity.x < -500) {
+                    setActiveCarouselIndex(prev => Math.min(projects.length - 1, prev + 1));
+                  }
                 }}
               >
                 <div className="relative w-full aspect-[16/10] overflow-hidden bg-[#13162d]">
