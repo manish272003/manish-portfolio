@@ -16,7 +16,7 @@ export const RecentProjects = () => {
 
   const handleWheel = (e: React.WheelEvent) => {
     const now = Date.now();
-    if (now - lastWheelTime.current < 500) return;
+    if (now - lastWheelTime.current < 250) return;
 
     if (e.deltaX > 20) {
       setActiveCarouselIndex(prev => Math.min(projects.length - 1, prev + 1));
@@ -89,7 +89,7 @@ export const RecentProjects = () => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ scale, x, opacity, zIndex, filter: blurFilter }}
                 exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ type: "spring", stiffness: 100, damping: 25, mass: 1.2 }}
+                transition={{ type: "spring", stiffness: 150, damping: 20, mass: 1 }}
                 className={`absolute w-[90%] max-w-[570px] bg-[#13162d] rounded-3xl overflow-hidden border border-white/10 shadow-2xl transition-shadow ${cursorStyle}`}
                 style={{ pointerEvents: pointerEvents as any }}
                 onClick={() => {
