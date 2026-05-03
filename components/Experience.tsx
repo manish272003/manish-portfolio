@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -50,7 +50,7 @@ const experienceData = [
     duration: "",
     location: "",
     description: "Analyzed platforms like Snapchat, Zomato, Netflix, and PhonePe to identify UX gaps and growth opportunities.",
-    img: "/independent-work.png",
+    img: "/product-analysis-v2.png",
     focusAreas: [
       "UX improvement insights",
       "Growth & acquisition strategy",
@@ -81,6 +81,7 @@ const experienceData = [
 
 export const Experience = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const [isHeaderActive, setIsHeaderActive] = useState(false);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -102,6 +103,14 @@ export const Experience = () => {
           },
         }
       );
+
+      // Auto Highlight Header
+      ScrollTrigger.create({
+        trigger: ".experience-header",
+        start: "top 60%",
+        onEnter: () => setIsHeaderActive(true),
+        onLeaveBack: () => setIsHeaderActive(false),
+      });
 
       // Block Animation
       gsap.utils.toArray<HTMLElement>(".experience-block").forEach((block) => {
@@ -127,30 +136,36 @@ export const Experience = () => {
   }, []);
 
   return (
-    <section id="experience" ref={sectionRef} className="pt-20 pb-32 w-full relative z-10 bg-black-100 flex flex-col items-center">
-      <div className="max-w-6xl w-full px-5">
-        
+    <section id="experience" ref={sectionRef} className="pt-2 w-full relative z-10 bg-black-100 flex flex-col items-center">
+      <div className="max-w-6xl w-full px-5 mt-16">
+
         {/* Section Heading */}
-        <div className="experience-header flex flex-col items-center mb-24 opacity-0">
+        <div className="experience-header flex flex-col items-center mb-24">
           <div className="relative group cursor-pointer flex flex-col items-center">
-            <h2 className="text-3xl md:text-5xl font-bold text-white tracking-[0.05em] transition-all duration-500 ease-out group-hover:scale-[1.02] group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-[linear-gradient(90deg,#0A84FF,#5E5CE6,#BF5AF2,#FF2D55,#FF6A00)] bg-[length:200%_auto] bg-left group-hover:bg-right group-hover:drop-shadow-[0_0_20px_rgba(191,90,242,0.5)]">
+            <h2 className={`text-3xl md:text-5xl font-bold tracking-[0.05em] transition-all duration-500 ease-out text-white ${isHeaderActive
+                ? "scale-[1.02] drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+                : "group-hover:scale-[1.02] group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+              }`}>
               PRODUCT EXPERIENCE
             </h2>
-            <div className="absolute -bottom-4 left-1/2 w-20 h-1 bg-[#bed7d9]/30 rounded-full transition-all duration-500 ease-out group-hover:w-full group-hover:left-0 group-hover:bg-[linear-gradient(90deg,#0A84FF,#5E5CE6,#BF5AF2,#FF2D55,#FF6A00)] group-hover:shadow-[0_0_15px_rgba(191,90,242,0.6)]"></div>
+            <div className={`absolute -bottom-4 rounded-full transition-all duration-500 ease-out h-1 ${isHeaderActive
+                ? "w-full left-0 bg-[linear-gradient(90deg,#0A84FF,#5E5CE6,#BF5AF2,#FF2D55,#FF6A00)] shadow-[0_0_15px_rgba(191,90,242,0.6)]"
+                : "left-1/2 w-20 bg-[#bed7d9]/30 group-hover:w-full group-hover:left-0 group-hover:bg-[linear-gradient(90deg,#0A84FF,#5E5CE6,#BF5AF2,#FF2D55,#FF6A00)] group-hover:shadow-[0_0_15px_rgba(191,90,242,0.6)]"
+              }`}></div>
           </div>
         </div>
 
         {/* Experience Blocks */}
-        <div className="flex flex-col gap-24 md:gap-32">
+        <div className="flex flex-col gap-24 md:gap-32 pb-32">
           {experienceData.map((exp, index) => {
             const isEven = index % 2 === 1;
 
             return (
-              <div 
-                key={exp.id} 
-                className={`experience-block opacity-0 flex flex-col ${isEven ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-16 w-full group`}
+              <div
+                key={exp.id}
+                className={`experience-block flex flex-col ${isEven ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-16 w-full group`}
               >
-                
+
                 {/* Content Side */}
                 <div className="w-full md:w-1/2 flex flex-col items-start">
                   <div className="mb-2">
@@ -197,10 +212,10 @@ export const Experience = () => {
                 {/* Visual Side */}
                 <div className="w-full md:w-1/2">
                   <div className={`relative w-full aspect-[16/10] rounded-3xl bg-[#0a0a0a]/50 backdrop-blur-xl border border-white/10 ${exp.img ? 'p-0' : 'p-6'} flex items-center justify-center overflow-hidden transition-all duration-500 ease-out hover:scale-[1.02] hover:border-[#5ce1e6]/40 hover:shadow-[0_0_30px_rgba(92,225,230,0.15)] group/card`}>
-                    
+
                     {/* Background glow movement */}
                     <div className="absolute inset-0 bg-gradient-to-br from-[#5ce1e6]/0 via-[#5ce1e6]/[0.05] to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 ease-out pointer-events-none"></div>
-                    
+
                     {/* Noise texture */}
                     <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")' }}></div>
 
@@ -229,7 +244,7 @@ export const Experience = () => {
                             </div>
                           </div>
                         </div>
-                        
+
                         {/* Floating blurred orb in placeholder */}
                         <div className="absolute bottom-[-20%] right-[-10%] w-32 h-32 bg-purple/20 blur-[50px] rounded-full pointer-events-none"></div>
                       </div>

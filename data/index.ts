@@ -45,7 +45,7 @@ export const projects = [
     iconLists: ["/notion.svg", "/figma.svg"],
     link: "https://mapcareerai.lovable.app/",
     sourceCode: "/project case study/CareerMap_AI_Case_Study.html",
-    ctaText: "View case",
+    ctaText: "View case study",
   },
   {
     id: 2,
@@ -55,7 +55,7 @@ export const projects = [
     iconLists: ["/notion.svg", "/figma.svg"],
     link: "https://planoraweds.lovable.app/",
     sourceCode: "/project case study/planora-case-study.html",
-    ctaText: "View case",
+    ctaText: "View case study",
   },
   {
     id: 3,
@@ -65,7 +65,7 @@ export const projects = [
     iconLists: ["/notion.svg", "/figma.svg"],
     link: "https://aeternavault.lovable.app/",
     sourceCode: "/project case study/Aeterna_Case_Study.html",
-    ctaText: "View case",
+    ctaText: "View case study",
   },
   {
     id: 4,
@@ -75,7 +75,7 @@ export const projects = [
     iconLists: ["/notion.svg", "/figma.svg"],
     link: "https://mini-ira.lovable.app/",
     sourceCode: "/project case study/Mini_Ira_PM_CaseStudy.html",
-    ctaText: "View case",
+    ctaText: "View case study",
   },
 ];
 

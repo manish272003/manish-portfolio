@@ -53,17 +53,17 @@ function Band({ maxSpeed = 50, minSpeed = 10 }) {
   const isMobile = width < 768;
 
   // Posisi responsif untuk card - DIPERBAIKI SINTAKS
-  const cardPosition = isMobile ? [4, 5, 0] : [3, 4, 0];
+  const cardPosition = isMobile ? [0, 3.5, 0] : [3, 4, 0];
   const initialJointPositions = isMobile ? [
-    [0.3, 0, 0],
-    [0.6, 0, 0],
-    [0.9, 0, 0],
-    [1.2, 0, 0]
+    [0, -0.5, 0],
+    [0, -1.0, 0],
+    [0, -1.5, 0],
+    [0, -2.0, 0]
   ] : [
-    [3.5, 0, 0],
-    [4, 0, 0],
-    [4.5, 0, 0],
-    [5, 0, 0]
+    [0, -0.5, 0],
+    [0, -1.0, 0],
+    [0, -1.5, 0],
+    [0, -2.0, 0]
   ];
 
   useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
@@ -128,7 +128,18 @@ function Band({ maxSpeed = 50, minSpeed = 10 }) {
             position={[0, -1.2, -0.05]}
             onPointerOver={() => hover(true)}
             onPointerOut={() => hover(false)}
-            onPointerUp={(e) => (e.target.releasePointerCapture(e.pointerId), drag(false))}
+            onPointerUp={(e) => {
+              e.target.releasePointerCapture(e.pointerId);
+              drag(false);
+              // Wait for the next tick so the RigidBody becomes dynamic again!
+              if (card.current) {
+                const clickX = e.point.x - card.current.translation().x;
+                const sign = Math.sign(clickX) || 1;
+                setTimeout(() => {
+                  card.current?.setAngvel({ x: 0, y: sign * 10, z: 0 }, true);
+                }, 50);
+              }
+            }}
             onPointerDown={(e) => (e.target.setPointerCapture(e.pointerId), drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation()))))}>
             <mesh geometry={nodes.card.geometry}>
               <meshPhysicalMaterial color="white" clearcoat={1} clearcoatRoughness={0.15} roughness={0.3} metalness={0.5} />

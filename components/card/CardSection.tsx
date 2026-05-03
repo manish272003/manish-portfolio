@@ -1,154 +1,156 @@
-"use client"; // Wajib untuk menggunakan useEffect
-import React, { useEffect, useRef } from 'react';
+"use client";
+import React, { useLayoutEffect, useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
-import Lenis from 'lenis';
-import Image from 'next/image'; // Gunakan <Image /> untuk optimasi gambar
-import styles from './CardSection.module.css'; // Impor CSS Module
-import './global.css'; // Impor CSS global
+import Image from 'next/image';
+import styles from './CardSection.module.css';
+import './global.css';
 
-// Data untuk marquee items
-const marqueeItems = [
-  { text: " PROJECTS & CASE STUDIES ", img: "/images/image1.png" },
-  { text: " PRODUCT THINKING ", img: "/images/image1.png" },
-  { text: " PROJECTS & CASE STUDIES ", img: "/images/image1.png" },
-  { text: " PRODUCT THINKING ", img: "/images/image1.png" }
-];
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 const CardSection: React.FC = () => {
-  const cardsRef = useRef<HTMLDivElement[]>([]);
+  // Since this component is imported dynamically with ssr: false,
+  // window is guaranteed to be defined on initial render.
+  const [isMobile, setIsMobile] = useState(() => 
+    typeof window !== 'undefined' ? window.innerWidth < 768 : false
+  );
+  
+  const containerRef = useRef<HTMLElement>(null);
+  const triggerRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      // Inisialisasi GSAP dan ScrollTrigger
-      gsap.registerPlugin(ScrollTrigger);
+  useIsomorphicLayoutEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-      // Smooth scroll dengan Lenis
-      const lenis = new Lenis();
-      lenis.on('scroll', ScrollTrigger.update);
-      gsap.ticker.add((time: number) => {
-        lenis.raf(time * 1000);
+  useIsomorphicLayoutEffect(() => {
+    if (!containerRef.current || !triggerRef.current) return;
+    
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
+      if (cards.length === 0) return;
+
+      const totalScrollHeight = window.innerHeight * 1.5;
+      
+      const positionsX = isMobile ? [25, 75, 25, 75] : [14, 38, 62, 86];
+      const positionsY = isMobile ? [28, 28, 72, 72] : [50, 50, 50, 50];
+      const rotations = isMobile ? [-5, 5, -5, 5] : [-15, -7.5, 7.5, 15];
+
+      // Use a single Timeline for perfect synchronization and no glitching!
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: triggerRef.current,
+          start: 'top top',
+          end: () => `+=${totalScrollHeight}`,
+          pin: containerRef.current,
+          pinSpacing: true,
+          anticipatePin: 1,
+          scrub: true,
+        }
       });
-      gsap.ticker.lagSmoothing(0);
 
-      const cards = cardsRef.current;
-      const totalScrollHeight = window.innerHeight * 3;
-      const positions = [14, 38, 62, 86];
-      const rotations = [-15, -7.5, 7.5, 15];
-
-      // Pin cards section
-      ScrollTrigger.create({
-        trigger: `.${styles.cards}`,
-        start: 'top top',
-        end: () => `+=${totalScrollHeight}`,
-        pin: true,
-        pinSpacing: true,
-      });
-
-      // Spread cards
-      cards.forEach((card, index) => {
-        gsap.to(card, {
-          left: `${positions[index]}%`,
-          rotation: `${rotations[index]}`,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: `.${styles.cards}`,
-            start: 'top top',
-            end: () => `+=${window.innerHeight}`,
-            scrub: 0.5,
-            id: `spread-${index}`,
-          },
-        });
-      });
-
-      // Rotate and flip cards with staggered effect
       cards.forEach((card, index) => {
         const frontEl = card.querySelector(`.${styles.flipCardFront}`) as HTMLElement;
         const backEl = card.querySelector(`.${styles.flipCardBack}`) as HTMLElement;
 
-        const staggerOffset = index * 0.05;
-        const startOffset = 1 / 3 + staggerOffset;
-        const endOffset = 2 / 3 + staggerOffset;
+        // Force GSAP to use percentage translations and reset pixel translations
+        // autoAlpha: 1 ensures the card only becomes visible once GSAP is fully ready, preventing FOUC!
+        gsap.set(card, { autoAlpha: 1, xPercent: -50, yPercent: -50, x: 0, y: 0 });
 
-        ScrollTrigger.create({
-          trigger: `.${styles.cards}`,
-          start: 'top top',
-          end: () => `+=${totalScrollHeight}`,
-          scrub: 1,
-          id: `rotate-flip-${index}`,
-          onUpdate: (self) => {
-            const progress = self.progress;
-            if (progress >= startOffset && progress <= endOffset) {
-              const animationProgress = (progress - startOffset) / (1 / 3);
-              const frontRotation = -180 * animationProgress;
-              const backRotation = 180 - 180 * animationProgress;
-              const cardRotation = rotations[index] * (1 - animationProgress);
+        // Initialize back element rotation
+        gsap.set(backEl, { rotationY: 180 });
 
-              if (frontEl && backEl) {
-                frontEl.style.transform = `rotateY(${frontRotation}deg)`;
-                backEl.style.transform = `rotateY(${backRotation}deg)`;
-                card.style.transform = `translate(-50%, -50%) rotate(${cardRotation}deg)`;
-              }
-            }
-          },
-        });
+        // Phase 1: Fan out (0 to 40% of scroll)
+        tl.to(card, {
+          left: `${positionsX[index]}%`,
+          ...(isMobile && { top: `${positionsY[index]}%` }),
+          rotation: `${rotations[index]}`,
+          ease: 'power1.inOut',
+          duration: 0.4,
+        }, 0);
+
+        // Phase 2: Flip and un-fan
+        const staggerOffset = index * 0.02;
+        const startOffset = 0.3 + staggerOffset; 
+        const duration = 0.4; // 0.7 - 0.3 = 0.4
+
+        // Un-fan the card back to straight
+        tl.to(card, {
+          rotation: 0,
+          ease: 'power1.inOut',
+          duration: duration,
+        }, startOffset);
+
+        // Flip front side
+        tl.to(frontEl, {
+          rotationY: -180,
+          ease: 'power1.inOut',
+          duration: duration,
+        }, startOffset);
+
+        // Flip back side into view
+        tl.to(backEl, {
+          rotationY: 0,
+          ease: 'power1.inOut',
+          duration: duration,
+        }, startOffset);
       });
-    }
+    });
 
-    // Cleanup
+    // Refresh ScrollTrigger after a slight delay to ensure any dynamic Next.js chunks 
+    // above this component have finished rendering, preventing incorrect trigger offsets.
+    const timeout = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 500);
+
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      clearTimeout(timeout);
+      ctx.revert();
     };
-  }, []);
-
-  // Fungsi untuk menghasilkan marquee items secara dinamis
-  const generateMarqueeItems = () => {
-    return [...Array(3)].map((_, i) => (
-      <div className={styles.marqueeContent} key={i}>
-        {marqueeItems.map((item, index) => (
-          <React.Fragment key={`${i}-${index}`}>
-            <span>{item.text}</span>
-            <Image
-              src={item.img}
-              alt="Gambar Marquee"
-              width={50}
-              height={50}
-              style={{ objectFit: 'contain' }}
-            />
-          </React.Fragment>
-        ))}
-      </div>
-    ));
-  };
+  }, [isMobile]);
 
   return (
-    <div>
-      {/* Cards Section */}
-      <section className={styles.cards}>
-        {[1, 2, 3, 4].map((id) => (
+    <div ref={triggerRef} style={{ position: 'relative', width: '100%', minHeight: '100vh' }}>
+      <section ref={containerRef} className={styles.cards} style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden' }}>
+        {[1, 2, 3, 4].map((id, index) => (
           <div
             key={id}
             className={styles.card}
             id={`card-${id}`}
             ref={(el) => {
-              if (el) cardsRef.current[id - 1] = el;
+              cardsRef.current[index] = el;
+            }}
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              width: isMobile ? '160px' : '300px',
+              height: isMobile ? '240px' : '450px',
+              opacity: 0, // Start fully hidden to prevent Flash of Unstyled Content (FOUC)
+              visibility: 'hidden',
+              willChange: 'transform' // Optimize GSAP animation
             }}
           >
-            <div className={styles.cardWrapper}>
-              <div className={styles.flipCardInner}>
+            <div className={styles.cardWrapper} style={{ position: 'absolute', width: '100%', height: '100%', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+              <div className={styles.flipCardInner} style={{ position: 'relative', width: '100%', height: '100%', transformStyle: 'preserve-3d' }}>
                 {/* Front Side */}
-                <div className={styles.flipCardFront}>
+                <div className={styles.flipCardFront} style={{ position: 'absolute', width: '100%', height: '100%', backfaceVisibility: 'hidden', borderRadius: '0.8em', overflow: 'hidden' }}>
                   <Image
-                    src={`/images/img${id === 1 ? '10' : id === 2 ? '10' : id === 3 ? '10' : '10'}.jpg`}
-                    alt="Deskripsi Gambar Depan"
+                    src={`/images/img10.jpg`}
+                    alt="Card Front"
                     width={500}
                     height={300}
-                    layout="responsive"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    priority
                   />
                 </div>
 
                 {/* Back Side */}
-                <div className={styles.flipCardBack} style={{ padding: 0, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div className={styles.flipCardBack} style={{ position: 'absolute', width: '100%', height: '100%', backfaceVisibility: 'hidden', borderRadius: '0.8em', overflow: 'hidden', padding: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#000000', transform: 'rotateY(180deg)' }}>
                   <Image
                     src={
                       id === 1 ? '/images/Problem Discovery.png' :
@@ -160,6 +162,7 @@ const CardSection: React.FC = () => {
                     width={500}
                     height={700}
                     style={{ width: '100%', height: '100%', objectFit: 'fill', borderRadius: '0.8em' }}
+                    priority
                   />
                 </div>
               </div>
@@ -167,7 +170,6 @@ const CardSection: React.FC = () => {
           </div>
         ))}
       </section>
-
     </div>
   );
 };

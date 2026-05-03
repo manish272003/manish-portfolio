@@ -3,44 +3,83 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaLocationArrow } from "react-icons/fa6";
-import { FiArrowRight } from "react-icons/fi";
-import { motion } from "framer-motion";
+import { FiArrowRight, FiChevronLeft, FiChevronRight, FiGlobe } from "react-icons/fi";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 
 import { projects } from "@/data";
 
-import { PinContainer } from "./ui/3d-pin";
-
 export const RecentProjects = () => {
+  const [isHeaderActive, setIsHeaderActive] = useState(false);
+  const [activeCarouselIndex, setActiveCarouselIndex] = useState(0);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        setActiveCarouselIndex(prev => Math.max(0, prev - 1));
+      } else if (e.key === "ArrowRight") {
+        setActiveCarouselIndex(prev => Math.min(projects.length - 1, prev + 1));
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [projects.length]);
+
   return (
     <section id="projects" className="pt-4 pb-20">
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        viewport={{ once: true, amount: 0.5 }}
-        className="flex flex-col items-center mb-10"
+        viewport={{ amount: 0.3 }}
+        onViewportEnter={() => setIsHeaderActive(true)}
+        className="flex flex-col items-center mt-16 mb-24"
       >
         <div className="relative group cursor-pointer flex flex-col items-center">
-          <h2 className="text-3xl md:text-5xl font-bold text-white tracking-[0.05em] transition-all duration-500 ease-out group-hover:scale-[1.02] group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-[linear-gradient(90deg,#0A84FF,#5E5CE6,#BF5AF2,#FF2D55,#FF6A00)] bg-[length:200%_auto] bg-left group-hover:bg-right group-hover:drop-shadow-[0_0_20px_rgba(191,90,242,0.5)]">
+          <h2 className={`text-3xl md:text-5xl font-bold tracking-[0.05em] transition-all duration-500 ease-out text-white ${
+            isHeaderActive 
+              ? "scale-[1.02] drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]" 
+              : "group-hover:scale-[1.02] group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+          }`}>
             RECENT PROJECTS
           </h2>
-          <div className="absolute -bottom-4 left-1/2 w-20 h-1 bg-[#bed7d9]/30 rounded-full transition-all duration-500 ease-out group-hover:w-full group-hover:left-0 group-hover:bg-[linear-gradient(90deg,#0A84FF,#5E5CE6,#BF5AF2,#FF2D55,#FF6A00)] group-hover:shadow-[0_0_15px_rgba(191,90,242,0.6)]"></div>
+          <div className={`absolute -bottom-4 rounded-full transition-all duration-500 ease-out h-1 ${
+            isHeaderActive
+              ? "w-full left-0 bg-[linear-gradient(90deg,#3B82F6,#A855F7,#EC4899,#F97316)] shadow-[0_0_15px_rgba(236,72,153,0.6)]"
+              : "left-1/2 w-20 bg-[#bed7d9]/30 group-hover:w-full group-hover:left-0 group-hover:bg-[linear-gradient(90deg,#3B82F6,#A855F7,#EC4899,#F97316)] group-hover:shadow-[0_0_15px_rgba(236,72,153,0.6)]"
+          }`}></div>
         </div>
       </motion.div>
 
-      <div className="mt-10 flex flex-wrap items-center justify-center gap-x-24 gap-y-8 p-4">
-        {projects.map(
-          (item, index) => (
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.1 }}
-              viewport={{ once: true, amount: 0.2 }}
-              key={item.id}
-              className="flex h-[32rem] w-[90vw] items-center justify-center sm:h-[41rem] sm:w-[570px] lg:min-h-[32.5rem]"
-            >
-              <PinContainer title="Visit" href={item.link}>
-                <div className="relative mb-10 flex w-[80vw] sm:w-[570px] aspect-[16/10] items-center justify-center overflow-hidden rounded-2xl lg:rounded-3xl bg-[#13162d]">
+      <div className="relative w-full h-[550px] md:h-[650px] flex items-center justify-center overflow-visible perspective-[1200px] mt-10">
+        <AnimatePresence initial={false}>
+          {projects.map((item, index) => {
+            const offset = index - activeCarouselIndex;
+            const absOffset = Math.abs(offset);
+
+            const scale = absOffset === 0 ? 1 : absOffset === 1 ? 0.8 : 0.6;
+            const x = offset === 0 ? "0%" : offset > 0 ? `${55 + absOffset * 15}%` : `-${55 + absOffset * 15}%`;
+            const opacity = absOffset === 0 ? 1 : absOffset === 1 ? 0.6 : 0;
+            const zIndex = 30 - absOffset * 10;
+            const pointerEvents = "auto";
+            const cursorStyle = absOffset !== 0 ? "cursor-pointer" : "";
+            const blurFilter = absOffset !== 0 ? "blur(4px)" : "blur(0px)";
+
+            return (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ scale, x, opacity, zIndex, filter: blurFilter }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ type: "spring", stiffness: 100, damping: 25, mass: 1.2 }}
+                className={`absolute w-[90%] max-w-[570px] bg-[#13162d] rounded-3xl overflow-hidden border border-white/10 shadow-2xl transition-shadow ${cursorStyle}`}
+                style={{ pointerEvents: pointerEvents as any }}
+                onClick={() => {
+                  if (absOffset !== 0) setActiveCarouselIndex(index);
+                }}
+              >
+                <div className="relative w-full aspect-[16/10] overflow-hidden bg-[#13162d]">
                   <div className="absolute inset-0 w-full h-full">
                     <Image
                       src="/bg.png"
@@ -58,33 +97,77 @@ export const RecentProjects = () => {
                       (item.img as string) === '/grid.svg' ? 'object-contain p-8 opacity-50' : 'object-fill'
                     }`}
                   />
+                  
+                  {absOffset === 0 && (
+                     <div className="absolute inset-0 opacity-0 hover:opacity-100 bg-black/60 backdrop-blur-sm transition-opacity duration-300 flex items-center justify-center z-20">
+                      <Link
+                        href={item.link || item.sourceCode}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                      >
+                        <button className="flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-semibold text-sm transition-transform duration-300 transform translate-y-4 hover:translate-y-0 hover:scale-105 active:scale-95 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] group">
+                          <FiGlobe className="text-lg" />
+                          <span>Live Demo</span>
+                          <FiArrowRight className="text-lg transition-transform duration-300 group-hover:translate-x-1" />
+                        </button>
+                      </Link>
+                     </div>
+                  )}
                 </div>
 
-                <h1 className="line-clamp-1 text-base font-bold md:text-xl lg:text-2xl">
-                  {item.title}
-                </h1>
-
-                <p className="line-clamp-2 text-sm font-light lg:text-xl lg:font-normal text-[#c1c2d3]">
-                  {item.des}
-                </p>
-
-                <div className="mb-3 mt-7 flex items-center justify-end">
-                  <Link
-                    href={item.sourceCode || item.link}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                  >
-                    <button className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-white/20 text-black font-medium text-sm transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] group">
-                      <span>{item.ctaText || "View case"}</span>
-                      <FiArrowRight className="text-lg transition-transform duration-300 group-hover:translate-x-1" />
-                    </button>
-                  </Link>
+                <div className="p-8 relative z-40 bg-[#13162d]">
+                  <h1 className="line-clamp-1 text-base font-bold md:text-xl lg:text-2xl text-white mb-2">
+                    {item.title}
+                  </h1>
+                  <p className="text-sm font-light lg:text-lg lg:font-normal text-[#c1c2d3]">
+                    {item.des}
+                  </p>
+                  {item.sourceCode && (
+                    <div className="mt-4 flex">
+                      <a href={item.sourceCode} target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-5 py-2 rounded-lg bg-purple-500/20 text-purple-300 font-medium text-sm transition-all hover:bg-purple-500 hover:text-white border border-purple-500/30 group">
+                        View case study <FiArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                      </a>
+                    </div>
+                  )}
                 </div>
-              </PinContainer>
-            </motion.div>
-          )
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
+
+        {/* Edge Navigation Arrows */}
+        {projects.length > 1 && (
+          <>
+            <button
+              onClick={() => setActiveCarouselIndex(prev => Math.max(0, prev - 1))}
+              disabled={activeCarouselIndex === 0}
+              className="absolute left-4 md:left-12 top-1/2 -translate-y-1/2 p-2 z-50 text-white/50 hover:text-white disabled:opacity-0 transition-colors focus:outline-none"
+            >
+              <FiChevronLeft className="w-12 h-12 md:w-16 md:h-16" />
+            </button>
+            <button
+              onClick={() => setActiveCarouselIndex(prev => Math.min(projects.length - 1, prev + 1))}
+              disabled={activeCarouselIndex === projects.length - 1}
+              className="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 p-2 z-50 text-white/50 hover:text-white disabled:opacity-0 transition-colors focus:outline-none"
+            >
+              <FiChevronRight className="w-12 h-12 md:w-16 md:h-16" />
+            </button>
+          </>
         )}
       </div>
+
+      {projects.length > 1 && (
+        <div className="flex justify-center items-center mt-8 gap-2.5 relative z-40">
+          {projects.map((item, i) => (
+            <button
+              key={item.id}
+              onClick={() => setActiveCarouselIndex(i)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${i === activeCarouselIndex ? 'bg-purple-400 w-10 shadow-[0_0_10px_rgba(192,132,252,0.5)]' : 'bg-white/30 hover:bg-white/60'}`}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 };

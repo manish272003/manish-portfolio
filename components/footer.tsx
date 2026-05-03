@@ -36,11 +36,11 @@ export const Footer = () => {
           <p className="text-[#a1a1aa] font-medium text-sm md:text-base mb-2">
             Let&apos;s build something meaningful together
           </p>
-          <a href="mailto:sunkishalamanishrao@gmail.com" className="group flex items-baseline gap-2 md:gap-4 cursor-pointer">
+          <a href="mailto:sunkishalamanishrao@gmail.com" className="group flex items-baseline gap-2 md:gap-4 cursor-pointer relative z-20">
             <h1 className="text-[5rem] md:text-[8rem] lg:text-[11rem] leading-none font-medium text-white tracking-tighter transition-colors duration-500 group-hover:text-[#c1c2d3]">
               Let&apos;s Chat
             </h1>
-            <FiArrowUpRight className="text-[#7c3aed] text-5xl md:text-7xl lg:text-[6rem] transition-transform duration-500 ease-out group-hover:translate-x-4 group-hover:-translate-y-4" />
+            <FiArrowUpRight className="text-[#7c3aed] text-5xl md:text-7xl lg:text-[6rem] transition-transform duration-500 ease-out group-hover:translate-x-4 group-hover:-translate-y-4 pointer-events-none" />
           </a>
         </div>
 
